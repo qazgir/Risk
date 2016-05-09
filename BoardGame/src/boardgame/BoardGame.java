@@ -16,15 +16,19 @@ import javafx.stage.Stage;
  * @author csstudent
  */
 public class BoardGame extends Application {
+  
+    public static Stage stage;
     
     @Override
     public void start(Stage stage) throws Exception {
+           this.stage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        
     }
 
     /**

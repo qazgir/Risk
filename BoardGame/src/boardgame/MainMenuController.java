@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -27,14 +28,19 @@ public class MainMenuController implements Initializable {
 private Button quit;
 
 @FXML
-private Label mainMenuBackground;
+private Button play;
 
 @FXML
 private ImageView backgroundImage;
-        
+
+private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg");     
+
 @Override
 public void initialize(URL url, ResourceBundle rb) {
-      
+    System.out.println(riskImage.getHeight());
+    System.out.println(riskImage.getWidth());
+    BoardGame.stage.setResizable(false);
+    backgroundImage.setImage(riskImage);
 }    
     
 public void quit(){

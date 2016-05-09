@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -8,23 +14,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.MainMenuController">
+<AnchorPane id="AnchorPane" minHeight="300.0" minWidth="570.0" prefHeight="300.0" prefWidth="570.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.MainMenuController">
     <stylesheets>
         <URL value="@mainmenu.css" />
     </stylesheets>
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane minHeight="300.0" minWidth="570.0" prefHeight="300.0" prefWidth="570.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="quit" layoutX="111.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#quit" prefHeight="30.0" prefWidth="300.0" text="Quit" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="336.0" />
-                  <Button layoutX="150.0" layoutY="249.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="300.0" text="Start" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="249.0" />
-                  <Text fill="#d01616" layoutX="150.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Risk" textAlignment="CENTER" wrappingWidth="300.2978515625">
+                  <ImageView fx:id="backgroundImage" fitHeight="300.0" fitWidth="570.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="quit" layoutX="420.0" layoutY="243.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#quit" prefHeight="57.0" prefWidth="150.0" text="Quit">
                      <font>
-                        <Font size="65.0" />
+                        <Font name="Cambria" size="30.0" />
                      </font>
-                  </Text>
-                  <Label prefHeight="479.0" prefWidth="600.0" />
+                  </Button>
+                  <Button fx:id="play" layoutY="243.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="57.0" prefWidth="150.0" text="Start">
+                     <font>
+                        <Font name="Cambria" size="30.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </center>
