@@ -33,7 +33,7 @@ private Button play;
 @FXML
 private ImageView backgroundImage;
 
-private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg");     
+private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg", 580, 450, true, true);     
 
 @Override
 public void initialize(URL url, ResourceBundle rb) {
