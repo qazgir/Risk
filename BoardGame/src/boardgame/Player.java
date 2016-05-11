@@ -39,7 +39,6 @@ public class Player {
         if(getPhase().equals("attack")){
             if(territory.equals("home") == false){
                 return true;
-            
             }
         }
         return false;
