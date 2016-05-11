@@ -13,6 +13,7 @@ public class Territory {
     private int units;
     private String territoryName;
     private Player controller;
+    private Territory[] adjacent;
     
     public Territory(int u, String s, Player n){
         units = u;
@@ -35,6 +36,14 @@ public class Territory {
     }
     public void changeUnits(int k){
         units = k;
+    }
+    public boolean isAdjacent(Territory t){
+        for(int i = 0; i<adjacent.length; i++){
+            if(t.equals(adjacent[i])){
+                return true;
+            }
+        }
+        return false;
     }
     
 }
