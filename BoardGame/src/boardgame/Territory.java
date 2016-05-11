@@ -30,6 +30,11 @@ public class Territory {
         return controller;
     }
     
-    
+    public void changeController(Player p){
+        controller = p;
+    }
+    public void changeUnits(int k){
+        units = k;
+    }
     
 }
