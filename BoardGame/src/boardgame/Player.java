@@ -11,10 +11,12 @@ package boardgame;
  * @author csstudent
  */
 public class Player {
+    private boolean turn;
     private String phase;
     private int units;
     private String name;
     private String territory;
+   
     
     public String getPhase(){
         return phase;
@@ -33,15 +35,23 @@ public class Player {
             return false;
     }
     
-    public void canAttack(){
+    public boolean canAttack(){
         if(getPhase().equals("attack")){
-            if(territory.equals("home") == false){ 
+            if(territory.equals("home") == false){
+                return true;
+            
             }
-            
-            
         }
-        
+        return false;
     }
     
+    public boolean canReinforce(){
+        if(turn == true){
+            if(territory.equals("home")){
+                return true;
+            }
+        }
+        return false;
+    }
     
 }
