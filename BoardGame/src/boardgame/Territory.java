@@ -12,10 +12,12 @@ package boardgame;
 public class Territory {
     private int units;
     private String territoryName;
+    private Player controller;
     
-    public Territory(int u, String s){
+    public Territory(int u, String s, Player n){
         units = u;
         territoryName = s;
+        controller = n;
     }
     public int getUnits(){
         return units;
@@ -23,10 +25,11 @@ public class Territory {
     public String getName(){
         return territoryName;
     }
-    /*
+    
     public Player getOccupied(){
-        
+        return controller;
     }
     
-    */
+    
+    
 }
