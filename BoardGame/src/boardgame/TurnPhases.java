@@ -11,29 +11,44 @@ package boardgame;
  */
 public class TurnPhases {
     
+    private static Game g;
+    
+    public static void setConnectedGame(Game game) {
+        g = game;
+    }
+    
     public TurnPhases() {
     }
     
     public static void reinforce(Player p) {
-        Game.setCurrentPhase("reinforce");
+        g.setCurrentPhase("reinforce");
         int numArmies = p.getArmiesPerTurn();
-        Game.outText("Place armies on your territories. Left: " + numArmies);
+        //g.outText("Place armies on your territories. Left: " + numArmies);
         
     }
     
     public static void attack(Player p) {
-        Game.setCurrentPhase("attack");
-        Game.outText("To attack, first select the territory you would like to attack from");
+        g.setCurrentPhase("attack");
+        //g.outText("To attack, first select the territory you would like to attack from");
+        Territory t = new Territory(0, "", null); 
+        while (!(t.getOwner().equals(p) && t.getUnits()>=2)) {
+            //wait for player to click country and save it to 't'
+        }
         
     }
     
     public static void move(Player p) {
-        Game.setCurrentPhase("move");
+        g.setCurrentPhase("move");
     }
     
     public static void takeTurn(Player p) {
         reinforce(p);
         attack(p);
         move(p);
+        g.setCurrentTurn((g.getCurrentTurn()+1) % g.getNumPlayers());
+    }
+    
+    public static int diceRoll() {
+        return (int)Math.random()*6 + 1;
     }
 }

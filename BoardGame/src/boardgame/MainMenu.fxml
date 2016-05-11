@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="570.0" prefHeight="300.0" prefWidth="570.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.MainMenuController">
+    <stylesheets>
+        <URL value="@mainmenu.css" />
+    </stylesheets>
+   <children>
+      <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="570.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane minHeight="300.0" minWidth="570.0" prefHeight="300.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="backgroundImage" fitHeight="350.0" fitWidth="580.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="quit" layoutX="430.0" layoutY="251.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#quit" prefHeight="57.0" prefWidth="150.0" text="Quit">
+                     <font>
+                        <Font name="Cambria" size="30.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="play" layoutY="251.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="57.0" prefWidth="150.0" text="Start">
+                     <font>
+                        <Font name="Cambria" size="30.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
