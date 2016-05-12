@@ -5,14 +5,19 @@
  */
 package boardgame;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -35,6 +40,8 @@ private ImageView backgroundImage;
 
 private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg", 580, 450, true, true);     
 
+public static Stage stage2;
+
 @Override
 public void initialize(URL url, ResourceBundle rb) {
     BoardGame.stage.setResizable(false);
@@ -44,5 +51,13 @@ public void initialize(URL url, ResourceBundle rb) {
 public void quit(){
     System.exit(0);
 }
+public void startGame() throws IOException{
+    this.stage2 = stage2;
+    Parent root = FXMLLoader.load(getClass().getResource("Map.fxml"));   
+    Scene scene = new Scene(root);
+    stage2.setScene(scene);
+    stage2.show();
+}
+
 }
 

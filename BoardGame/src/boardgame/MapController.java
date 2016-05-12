@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 /**
@@ -19,14 +20,20 @@ import javafx.scene.text.Text;
 public class MapController implements Initializable {
     
 @FXML
-private Text phaseIndic;
+public Text phaseIndic;
+
+@FXML
+public Button advancePhase;
+
+@FXML
+public Text playerIndic;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+        
     }    
     
 }
