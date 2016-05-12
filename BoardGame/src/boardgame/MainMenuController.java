@@ -37,8 +37,6 @@ private final Image riskImage = new Image("http://screenrant.com/wp-content/uplo
 
 @Override
 public void initialize(URL url, ResourceBundle rb) {
-    System.out.println(riskImage.getHeight());
-    System.out.println(riskImage.getWidth());
     BoardGame.stage.setResizable(false);
     backgroundImage.setImage(riskImage);
 }    

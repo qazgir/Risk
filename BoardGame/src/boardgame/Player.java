@@ -20,11 +20,9 @@ public class Player {
     
     public String getPhase(){
         return phase;
-        
     }
     
     public int getUnits(){
-        
         return units;
     }
     
@@ -32,7 +30,6 @@ public class Player {
         if(getPhase().equals("Move")){
             if(units <= 3){
                return true; 
-                
             }
         }
             return false;
@@ -43,8 +40,6 @@ public class Player {
             if(territory.equals("home") == false){
                 return true;
             }
-            
-            
         }
         return false;
     }
