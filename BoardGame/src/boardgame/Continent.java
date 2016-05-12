@@ -10,13 +10,22 @@ package boardgame;
  * @author csstudent
  */
 public class Continent {
-    private Territory[] territories;
-    private String name;
+    private final Territory[] territories;
+    private final String name;
+    private final int controllerUnits;
     
+    public Continent(int u, String n, Territory[] t){
+        controllerUnits = u;
+        name = n;
+        territories = t;
+    }
     public Territory[] getTerritory(){
         return territories;
     }
     
+    public int getControllerUnits(){
+        return controllerUnits;
+    }
     public boolean getControlled(){
         int counter = 0;
         Player controller = territories[0].getOccupied();
