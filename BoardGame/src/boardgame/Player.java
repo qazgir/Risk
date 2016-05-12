@@ -22,9 +22,6 @@ public class Player {
         return phase;
     }
     
-    public int getUnits(){
-        return units;
-    }
     
     public boolean canMove(){
         if(getPhase().equals("Move")){
@@ -53,4 +50,10 @@ public class Player {
         return false;
     }
     
+    public int getUnitsPerTurn(){
+        
+        return units;
+        
+    }
+   
 }
