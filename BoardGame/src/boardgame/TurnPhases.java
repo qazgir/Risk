@@ -25,7 +25,7 @@ public class TurnPhases {
     
     public static void reinforce(Player p) {
         g.setCurrentPhase("reinforce");
-        int numArmies = p.getArmiesPerTurn();
+        int numArmies = p.getUnitsPerTurn();
         //g.outText("Place armies on your territories. Left: " + numArmies);
         Territory t = new Territory(0, "", null);
         for (int i = 0; i < numArmies; i++) {

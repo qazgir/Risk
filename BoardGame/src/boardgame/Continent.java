@@ -26,6 +26,7 @@ public class Continent {
     public int getControllerUnits(){
         return controllerUnits;
     }
+    
     public boolean getControlled(){
         int counter = 0;
         Player controller = territories[0].getOccupied();
@@ -37,4 +38,5 @@ public class Continent {
         }
         return true;
     }
+    
 }

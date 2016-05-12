@@ -15,42 +15,53 @@ public class Player {
     private String phase;
     private int units;
     private String name;
-    private String territory;
+    private Territory[] myTerritory;
    
     
     public String getPhase(){
         return phase;
     }
     
-    public int getUnits(){
-        return units;
-    }
     
     public boolean canMove(){
         if(getPhase().equals("Move")){
-            if(units <= 3){
+            if(units >= 2){
                return true; 
             }
         }
             return false;
     }
-    
-    public boolean canAttack(){
-        if(getPhase().equals("attack")){
-            if(territory.equals("home") == false){
+    public boolean controlledT(Territory t){
+        for(int k = 0; k<myTerritory.length; k++){
+            if(myTerritory[k].equals(t)){
                 return true;
             }
         }
         return false;
     }
     
-    public boolean canReinforce(){
+    public boolean canAttack(Territory mine, Territory t){
+        if(getPhase().equals("Attack")){
+            if(this.equals(t.getOccupied()) !=true && this.controlledT(mine)==true){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean canReinforce(Territory t){
         if(turn == true){
-            if(territory.equals("home")){
+            if(this.equals(t.getOccupied()) == true){
                 return true;
             }
         }
         return false;
     }
     
+    public int getUnitsPerTurn(){
+        
+        return units;
+        
+    }
+   
 }
