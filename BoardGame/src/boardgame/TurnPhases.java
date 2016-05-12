@@ -5,6 +5,9 @@
  */
 package boardgame;
 
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 /**
  *
  * @author csstudent
@@ -37,11 +40,27 @@ public class TurnPhases {
     public static void attack(Player p) {
         g.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
-        Territory t = new Territory(0, "", null); 
-        while (!(t.getOccupied().equals(p) && t.getUnits()>=2)) {
+        Territory from = new Territory(0, "", null); 
+        while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
+            //wait for player to click country and save it to 't'
+            //If ENDPHASE button is pressed, return
+        }
+        Territory to = new Territory(0, "", null);
+        while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
             //wait for player to click country and save it to 't'
         }
-        
+        while (to.getUnits() > 0 && from.getUnits() > 0) {
+            ArrayList<Integer> attackingDice = rollNumDice(Math.min(from.getUnits() - 1, 3));
+            ArrayList<Integer> defendingDice = rollNumDice(Math.min(to.getUnits() - 1, 2));
+            for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
+                if (attackingDice.get(i) > defendingDice.get(i)) {
+                    to.changeUnits(to.getUnits()-1);
+                } else {
+                    from.changeUnits(from.getUnits()-1);
+                }
+                //wait for player to continue attack or press ENDPHASE(retreat) button
+            }
+        }
     }
     
     public static void move(Player p) {
@@ -57,5 +76,16 @@ public class TurnPhases {
     
     public static int diceRoll() {
         return (int)Math.random()*6 + 1;
+    }
+    public static ArrayList<Integer> rollNumDice(int num) {
+        TreeSet<Integer> sorted = new TreeSet<Integer>();
+        for (int i = 0; i < num; i++) {
+            sorted.add(diceRoll());
+        }
+        ArrayList<Integer> out = new ArrayList<Integer>();
+        for (int i : sorted) {
+            out.add(i);
+        }
+        return out;
     }
 }
