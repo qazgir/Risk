@@ -5,6 +5,8 @@
  */
 package boardgame;
 
+import javafx.scene.control.Button;
+
 /**
  *
  * @author csstudent
@@ -14,11 +16,13 @@ public class Territory {
     private final String territoryName;
     private Player controller;
     private Territory[] adjacent;
+    private Button button;
     
-    public Territory(int u, String s, Player n){
+    public Territory(int u, String s, Player n, Button b){
         units = u;
         territoryName = s;
         controller = n;
+        //b.setOnMouseClicked(Put in method 'this.handleClick()');
     }
     public int getUnits(){
         return units;
@@ -46,4 +50,7 @@ public class Territory {
         return false;
     }
     
+    public void handleClick() {
+        
+    }
 }
