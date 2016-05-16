@@ -15,9 +15,11 @@ public class Territory {
     private Player controller;
     private Territory[] adjacent;
     
-    public Territory(int u, String s, Player n){
+    public Territory(int u, String s){
         units = u;
         territoryName = s;
+    }
+    public void setController(Player n){
         controller = n;
     }
     public int getUnits(){
