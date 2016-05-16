@@ -59,9 +59,9 @@ public void startGame() throws IOException{
     fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
     Parent root = fxmlLoader.load();
     Scene scene = new Scene(root);
+    scene.getStylesheets().add(getClass().getResource("map.css").toExternalForm());
     stage2.setScene(scene);
     stage2.show();
-    BoardGame.stage.hide();
 }
 
 }
