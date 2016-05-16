@@ -41,6 +41,8 @@ private ImageView backgroundImage;
 private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg", 580, 450, true, true);     
 
 public static Stage stage2;
+    
+public static FXMLLoader fxmlLoader;
 
 @Override
 public void initialize(URL url, ResourceBundle rb) {
@@ -51,12 +53,15 @@ public void initialize(URL url, ResourceBundle rb) {
 public void quit(){
     System.exit(0);
 }
+
 public void startGame() throws IOException{
-    this.stage2 = stage2;
-    Parent root = FXMLLoader.load(getClass().getResource("Map.fxml"));   
+    MainMenuController.stage2 = BoardGame.stage;
+    fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
+    Parent root = fxmlLoader.load();
     Scene scene = new Scene(root);
     stage2.setScene(scene);
     stage2.show();
+    BoardGame.stage.hide();
 }
 
 }
