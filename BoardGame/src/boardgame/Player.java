@@ -18,6 +18,7 @@ public class Player {
     private Territory[] myTerritory;
    
     
+    
     public String getPhase(){
         return phase;
     }

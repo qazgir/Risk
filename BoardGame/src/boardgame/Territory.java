@@ -11,7 +11,7 @@ package boardgame;
  */
 public class Territory {
     private int units;
-    private String territoryName;
+    private final String territoryName;
     private Player controller;
     private Territory[] adjacent;
     
@@ -38,8 +38,8 @@ public class Territory {
         units = k;
     }
     public boolean isAdjacent(Territory t){
-        for(int i = 0; i<adjacent.length; i++){
-            if(t.equals(adjacent[i])){
+        for (Territory adjacent1 : adjacent) {
+            if (t.equals(adjacent1)) {
                 return true;
             }
         }

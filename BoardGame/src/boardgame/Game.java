@@ -13,9 +13,11 @@ public class Game {
     private Player[] players;
     private int currentTurn;
     private String currentPhase;
+    private Continent[] continents;
     
-    public Game(Player[] p) {
+    public Game(Player[] p, Continent[] c) {
         players = p;
+        continents = c;
         currentTurn = 0;
     }
     
@@ -42,5 +44,6 @@ public class Game {
     public void setCurrentTurn(int t) {
         currentTurn = t;
     }
+
     
 }
