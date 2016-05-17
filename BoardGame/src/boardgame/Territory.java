@@ -16,11 +16,13 @@ public class Territory {
     private final String territoryName;
     private Player controller;
     private Territory[] adjacent;
-    private Button button;
+    private final Button linkedButton;
     
-    public Territory(int u, String s){
+    public Territory(int u, String s, Button b){
+        linkedButton = b;
         units = u;
         territoryName = s;
+        linkedButton.setText(s +":"+u);
     }
     public void setController(Player n){
         controller = n;
