@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -18,6 +20,8 @@ import javafx.scene.text.Text;
  * @author csstudent
  */
 public class MapController implements Initializable {
+    
+private final Image backgroundImage = new Image("4x4.gif", 580, 450, true, true);     
     
 @FXML
 public Text phaseIndic;
@@ -28,6 +32,8 @@ public Button advancePhase;
 @FXML
 public Text playerIndic;
 
+@FXML
+private ImageView background;
     /**
      * Initializes the controller class.
      */
@@ -57,6 +63,7 @@ public Text playerIndic;
         Continent c2 = new Continent(4, "Continent2",TArray2);
         Continent c3 = new Continent(4, "Continent3",TArray3);
         Continent c4 = new Continent(4, "Continent4",TArray4);
+        background.setImage(backgroundImage);
     }    
     
 }

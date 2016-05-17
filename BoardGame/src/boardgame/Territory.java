@@ -18,7 +18,7 @@ public class Territory {
     private Territory[] adjacent;
     private Button button;
     
-    public Territory(int u, String s, Player n, Button b){
+    public Territory(int u, String s){
         units = u;
         territoryName = s;
     }
