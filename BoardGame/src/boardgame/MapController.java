@@ -21,8 +21,6 @@ import javafx.scene.text.Text;
  */
 public class MapController implements Initializable {
     
-private final Image backgroundImage = new Image("4x4.gif", 580, 450, true, true);     
-    
 @FXML
 public Text phaseIndic;
 
