@@ -7,8 +7,83 @@ and open the template in the editor.
     Created on : May 16, 2016, 1:11:32 PM
     Author     : csstudent
 */
-.mainFxmlClass {
     .button1{
-        -fx-background-color: #CCFF99;
+        fx-background-color: ffb3b3;
+        
     }
-}
+    .button2{
+        fx-background-color: ffb3b3;
+        
+    }
+
+    .button3{
+        fx-background-color: ffb3b3;
+        
+    }
+
+    .button4{
+        fx-background-color: ffb3b3;
+        
+    }
+
+    .button5{
+        fx-background-color: ffccff;
+        
+    }
+
+    .button6{
+        fx-background-color: ffccff;
+        
+    }
+
+    .button7{
+        fx-background-color: ffccff;
+        
+    }
+
+    .button8{
+        fx-background-color: ffccff;
+        
+    }
+
+    .button9{
+        fx-background-color: ccf5ff;
+        
+    }
+
+    .button10{
+        fx-background-color: ccf5ff;
+        
+    }
+
+    
+    .button11{
+        fx-background-color: ccf5ff;
+        
+    }
+
+    .button12{
+        fx-background-color: ccf5ff;
+        
+    }
+
+    .button13{
+        fx-background-color: ccffcc;
+        
+    }
+
+    .button14{
+        fx-background-color: ccffcc;
+        
+    }
+
+    .button15{
+        fx-background-color: ccffcc;
+        
+    }
+
+    .button16{
+        fx-background-color: ccffcc;
+        
+    }
+
