@@ -6,6 +6,7 @@
 package boardgame;
 
 import javafx.scene.control.Button;
+import java.util.*;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Territory {
     private int units;
     private final String territoryName;
     private Player controller;
-    private Territory[] adjacent;
+    private ArrayList<Territory> adjacent;
     private final Button linkedButton;
     
     public Territory(int u, String s, Button b){
@@ -51,6 +52,9 @@ public class Territory {
             }
         }
         return false;
+    }
+    public void addAdjacent(Territory t){
+        adjacent.add(t);
     }
     
 }
