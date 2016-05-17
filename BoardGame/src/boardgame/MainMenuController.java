@@ -44,6 +44,39 @@ public static Stage stage2;
     
 public static FXMLLoader fxmlLoader;
 
+@FXML
+public Button button1;
+@FXML
+public Button button2;
+@FXML
+public Button button3;
+@FXML
+public Button button4;
+@FXML
+public Button button5;
+@FXML
+public Button button6;
+@FXML
+public Button button7;
+@FXML
+public Button button8;
+@FXML
+public Button button9;
+@FXML
+public Button button10;
+@FXML
+public Button button11;
+@FXML
+public Button button12;
+@FXML
+public Button button13;
+@FXML
+public Button button14;
+@FXML
+public Button button15;
+@FXML
+public Button button16;
+
 @Override
 public void initialize(URL url, ResourceBundle rb) {
     BoardGame.stage.setResizable(false);
@@ -56,10 +89,10 @@ public void quit(){
 
 public void startGame() throws IOException{
     MainMenuController.stage2 = BoardGame.stage;
-    fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
+    fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));  
     Parent root = fxmlLoader.load();
     Scene scene = new Scene(root);
-    scene.getStylesheets().add(getClass().getResource("map.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("/map.css").toExternalForm());
     stage2.setScene(scene);
     stage2.show();
 }
