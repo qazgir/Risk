@@ -27,9 +27,9 @@ public class TurnPhases {
         g.setCurrentPhase("reinforce");
         int numArmies = p.getUnitsPerTurn();
         //g.outText("Place armies on your territories. Left: " + numArmies);
-        Territory t = new Territory(0, "", null);
+        Territory t = new Territory(0, "");
         for (int i = 0; i < numArmies; i++) {
-            t = new Territory(0, "", null);
+            t = new Territory(0, "");
             while (!(t.getOccupied().equals(p))) {
                 //wait for player to click country and save it to 't'
             }
@@ -40,12 +40,12 @@ public class TurnPhases {
     public static void attack(Player p) {
         g.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
-        Territory from = new Territory(0, "", null); 
+        Territory from = new Territory(0, ""); 
         while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
             //wait for player to click country and save it to 't'
             //If ENDPHASE button is pressed, return
         }
-        Territory to = new Territory(0, "", null);
+        Territory to = new Territory(0, "");
         while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
             //wait for player to click country and save it to 't'
         }
