@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -18,6 +20,8 @@ import javafx.scene.text.Text;
  * @author csstudent
  */
 public class MapController implements Initializable {
+    
+private final Image backgroundImage = new Image("4x4.gif", 580, 450, true, true);     
     
 @FXML
 public Text phaseIndic;
@@ -28,12 +32,14 @@ public Button advancePhase;
 @FXML
 public Text playerIndic;
 
+@FXML
+private ImageView background;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        background.setImage(backgroundImage);
     }    
     
 }
