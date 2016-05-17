@@ -21,6 +21,8 @@ public class Territory {
     public Territory(int u, String s, Player n, Button b){
         units = u;
         territoryName = s;
+    }
+    public void setController(Player n){
         controller = n;
         //b.setOnMouseClicked(Put in method 'this.handleClick()');
     }
@@ -48,9 +50,5 @@ public class Territory {
             }
         }
         return false;
-    }
-    
-    public void handleClick() {
-        
     }
 }
