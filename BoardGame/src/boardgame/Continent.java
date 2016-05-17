@@ -28,15 +28,20 @@ public class Continent {
     }
     
     public boolean getControlled(){
-        int counter = 0;
         Player controller = territories[0].getOccupied();
-        while(counter!=territories.length){
-            if(territories[counter].getOccupied()!=controller){
+        for (Territory t : territories) {
+            if(t.getOccupied()!=controller){
                 return false;
             }
-            counter++;
         }
         return true;
+    }
+    public Player getController() {
+        if (getControlled()) {
+            return territories[0].getOccupied();
+        } else {
+            return null;
+        }
     }
     
 }

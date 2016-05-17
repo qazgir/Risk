@@ -40,24 +40,31 @@ public class TurnPhases {
     public static void attack(Player p) {
         g.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
-        Territory from = new Territory(0, "", null); 
-        while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
-            //wait for player to click country and save it to 't'
-            //If ENDPHASE button is pressed, return
-        }
-        Territory to = new Territory(0, "", null);
-        while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
-            //wait for player to click country and save it to 't'
-        }
-        while (to.getUnits() > 0 && from.getUnits() > 0) {
-            ArrayList<Integer> attackingDice = rollNumDice(Math.min(from.getUnits() - 1, 3));
-            ArrayList<Integer> defendingDice = rollNumDice(Math.min(to.getUnits() - 1, 2));
-            for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
-                if (attackingDice.get(i) > defendingDice.get(i)) {
-                    to.changeUnits(to.getUnits()-1);
-                } else {
-                    from.changeUnits(from.getUnits()-1);
+        while (true) {
+            Territory from = new Territory(0, "", null); 
+            while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
+                //wait for player to click country and save it to 't'
+                //If ENDPHASE button is pressed, return
+            }
+            Territory to = new Territory(0, "", null);
+            while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
+                //wait for player to click country and save it to 't'
+            }
+            while (to.getUnits() > 0 && from.getUnits() > 1) {
+                ArrayList<Integer> attackingDice = rollNumDice(Math.min(from.getUnits() - 1, 3));
+                ArrayList<Integer> defendingDice = rollNumDice(Math.min(to.getUnits() - 1, 2));
+                for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
+                    if (attackingDice.get(i) > defendingDice.get(i)) {
+                        to.changeUnits(to.getUnits()-1);
+                    } else {
+                        from.changeUnits(from.getUnits()-1);
+                    }
                 }
+                //option for attacker to surrender; if so, break from loop
+            }
+            if (to.getUnits() <= 0) {
+                to.getOccupied().surrenderTerritory(to, p);
+                //move Player p's units to Territory 'to'
             }
         }
     }
