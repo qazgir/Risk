@@ -118,6 +118,7 @@ public void startGame() throws IOException{
         Continent c2 = new Continent(4, "Continent2",TArray2);
         Continent c3 = new Continent(4, "Continent3",TArray3);
         Continent c4 = new Continent(4, "Continent4",TArray4);
+        t1.addAdjacent(t2);
 }
 
 }
