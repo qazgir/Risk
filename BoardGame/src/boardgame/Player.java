@@ -17,6 +17,10 @@ public class Player {
     private String name;
     private Territory[] myTerritory;
    
+    public Player(int unit, String name, Territory[] myTerritory){
+        unit = 30;
+        name = "Player1";
+    }
     
     
     public String getPhase(){
@@ -51,7 +55,7 @@ public class Player {
     }
     
     public boolean canReinforce(Territory t){
-        if(turn == true){
+        if(getPhase().equals("Reinforce")){
             if(this.equals(t.getOccupied()) == true){
                 return true;
             }
