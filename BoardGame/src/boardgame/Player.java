@@ -1,5 +1,7 @@
 package boardgame;
 
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,62 +13,43 @@ package boardgame;
  * @author csstudent
  */
 public class Player {
-    private boolean turn;
-    private String phase;
     private int units;
     private String name;
-    private Territory[] myTerritory;
+    private ArrayList<Territory> territories;
    
-    public Player(int unit, String name, Territory[] myTerritory){
-        unit = 30;
-        name = "Player1";
+    public Player(String name, ArrayList<Territory> myTerritory){
+        units = 3;
+        this.name = name;
+        territories = myTerritory;
     }
     
-    
-    public String getPhase(){
-        return phase;
-    }
-    
-    
-    public boolean canMove(){
-        if(getPhase().equals("Move")){
-            if(units >= 2){
-               return true; 
-            }
-        }
-            return false;
-    }
-    public boolean controlledT(Territory t){
-        for(int k = 0; k<myTerritory.length; k++){
-            if(myTerritory[k].equals(t)){
+    public boolean isControlling(Territory t){
+        for (Territory territorie : territories) {
+            if (territorie.equals(t)) {
                 return true;
             }
         }
         return false;
     }
     
-    public boolean canAttack(Territory mine, Territory t){
-        if(getPhase().equals("Attack")){
-            if(this.equals(t.getOccupied()) !=true && this.controlledT(mine)==true){
-                return true;
-            }
+    public void addTerritory(Territory t) {
+        if (!isControlling(t)) {
+            territories.add(t);
         }
-        return false;
+    }
+    public void surrenderTerritory(Territory t, Player p) {
+        if (isControlling(t)) {
+            p.addTerritory(t);
+            territories.remove(t);
+        }
     }
     
-    public boolean canReinforce(Territory t){
-        if(getPhase().equals("Reinforce")){
-            if(this.equals(t.getOccupied()) == true){
-                return true;
-            }
-        }
-        return false;
+    public void setUnitsPerTurn(int u) {
+        units = u;
     }
     
-    public int getUnitsPerTurn(){
-        
+    public int getUnitsPerTurn() {
         return units;
-        
     }
    
 }

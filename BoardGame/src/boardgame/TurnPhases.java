@@ -41,12 +41,12 @@ public class TurnPhases {
         g.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
         while (true) {
-            Territory from = new Territory(0, ""); 
+            Territory from = new Territory(0, "", null); 
             while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
                 //wait for player to click country and save it to 't'
                 //If ENDPHASE button is pressed, return
             }
-            Territory to = new Territory(0, "");
+            Territory to = new Territory(0, "", null);
             while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
                 //wait for player to click country and save it to 't'
             }
@@ -67,11 +67,11 @@ public class TurnPhases {
     
     public static void move(Player p) {
         g.setCurrentPhase("move");
-        Territory from = new Territory(0, "");
+        Territory from = new Territory(0, "", null);
         while (!from.getOccupied().equals(p) || from.getUnits() < 2) {
             //wait for player to click country and save it to 't'
         }
-        Territory to = new Territory(0, "");
+        Territory to = new Territory(0, "", null);
         while (!from.isAdjacent(to) || !to.getOccupied().equals(p)) {
             //wait for player to click country and save it to 't'
         }
