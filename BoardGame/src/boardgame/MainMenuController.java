@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -89,10 +88,10 @@ public void quit(){
 
 public void startGame() throws IOException{
     MainMenuController.stage2 = BoardGame.stage;
-    fxmlLoader = new FXMLLoader(getClass().getResource("/Map.fxml"));  
+    fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
     Parent root = fxmlLoader.load();
     Scene scene = new Scene(root);
-    scene.getStylesheets().add(getClass().getResource("/map.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("map.css").toExternalForm());
     stage2.setScene(scene);
     stage2.show();
 }
