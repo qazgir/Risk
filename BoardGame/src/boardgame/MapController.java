@@ -69,7 +69,7 @@ private ImageView background;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+       int bah = 2;
     }    
     
     public void createMVPTerratories(){

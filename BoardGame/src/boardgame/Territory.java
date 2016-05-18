@@ -23,7 +23,7 @@ public class Territory {
         linkedButton = b;
         units = u;
         territoryName = s;
-        linkedButton.setText(s +":"+u);
+        linkedButton.setText(this.territoryName +":"+u);
     }
     public void setController(Player n){
         controller = n;
