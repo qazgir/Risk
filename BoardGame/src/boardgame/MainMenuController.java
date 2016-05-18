@@ -74,16 +74,19 @@ public void startGame() throws IOException{
         alert.setHeaderText("Player Selector");
         alert.setContentText("How many players do you want?");
 
+        ButtonType buttonTypeTwo = new ButtonType("Two");    
         ButtonType buttonTypeThree = new ButtonType("Three");
         ButtonType buttonTypeFour = new ButtonType("Four");
         ButtonType buttonTypeFive = new ButtonType("Five");
-        ButtonType buttonTypeSix = new ButtonType("six");
+        ButtonType buttonTypeSix = new ButtonType("Six");
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        alert.getButtonTypes().setAll(buttonTypeThree, buttonTypeFour, buttonTypeFive, buttonTypeSix, buttonTypeCancel);
+        alert.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeFive, buttonTypeSix, buttonTypeCancel);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeThree){
+        if(result.get() == buttonTypeTwo){
+            this.startingUnits = 40;
+        }else if (result.get() == buttonTypeThree){
             this.startingUnits = 35;
         } else if (result.get() == buttonTypeFour) {
             this.startingUnits = 30;
@@ -91,7 +94,8 @@ public void startGame() throws IOException{
             this.startingUnits = 25;
         } else if (result.get() == buttonTypeSix){
             this.startingUnits = 20;
-        }else{
+        }else if(result.get() == buttonTypeCancel){
+            System.exit(0);
             // ... user chose CANCEL or closed the dialog
         }
     
