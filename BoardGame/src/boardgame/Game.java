@@ -11,14 +11,16 @@ package boardgame;
  */
 public class Game {
     private static Player[] players;
-    private static int currentTurn;
+    private static int currentTurn = 0;
     private static String currentPhase;
     private static Continent[] continents;
     
-    public Game(Player[] p, Continent[] c) {
+    public static void setPlayers(Player[] p) {
         players = p;
+    }
+    
+    public static void setContinents(Continent[] c) {
         continents = c;
-        currentTurn = 0;
     }
     
     public static void outText(String s) {
