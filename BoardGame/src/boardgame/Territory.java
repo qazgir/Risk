@@ -63,6 +63,7 @@ public class Territory {
     
     public void handleClick() {
         Game.setLastClickedTerritory(this);
+    }
     public void addSideAdjacent(Territory t, Territory m, Territory d, Territory e, Territory f){
         adjacent.add(t);
         adjacent.add(m);
