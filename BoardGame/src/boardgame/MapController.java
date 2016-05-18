@@ -72,7 +72,7 @@ private ImageView background;
        int bah = 2;
     }    
     
-    public void createMVPTerratories(){
+    public void createMVPTerritories(){
         Territory t1 = new Territory(0, "JackyMayo", button1);
         Territory t2 = new Territory(0, "EE-Sama", button2);
         Territory t3 = new Territory(0, "RTZBabyrage", button3);
@@ -97,5 +97,21 @@ private ImageView background;
         Continent c2 = new Continent(4, "Continent2",TArray2);
         Continent c3 = new Continent(4, "Continent3",TArray3);
         Continent c4 = new Continent(4, "Continent4",TArray4);
+        t1.addCornerAdjacent(t2, t6, t5);
+        t2.addSideAdjacent(t1, t3, t7, t5, t6);
+        t3.addSideAdjacent(t2, t4, t6, t7, t8);
+        t4.addCornerAdjacent(t3, t7, t8);
+        t5.addSideAdjacent(t1, t2, t6, t9, t10);
+        t6.addMiddleAdjacent(t1, t2, t3, t5, t7, t9, t10, t11);
+        t7.addMiddleAdjacent(t2, t3, t4, t6, t8, t10, t11, t12);
+        t8.addSideAdjacent(t3, t4, t7, t11, t12);
+        t9.addSideAdjacent(t5, t6, t10, t13, t14);
+        t10.addMiddleAdjacent(t5, t6, t7, t9, t11, t13, t14, t15);
+        t11.addMiddleAdjacent(t6, t7, t8, t10, t12, t14, t15, t16);
+        t12.addSideAdjacent(t7, t8, t11, t15, t16);
+        t13.addCornerAdjacent(t9, t10, t14);
+        t14.addSideAdjacent(t13, t15, t9, t10, t11);
+        t15.addSideAdjacent(t14, t16, t10, t11, t12);
+        t16.addCornerAdjacent(t15, t11, t12);
         }
 }
