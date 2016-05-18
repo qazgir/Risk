@@ -14,6 +14,7 @@ public class Game {
     private static int currentTurn = 0;
     private static String currentPhase;
     private static Continent[] continents;
+    private static Territory lastClickedTerritory;
     
     public static void setPlayers(Player[] p) {
         players = p;
@@ -50,4 +51,13 @@ public class Game {
         return continents;
     }
     
+    public static void resetLastClickedTerritory() {
+        lastClickedTerritory = new Territory(0, "", null);
+    }
+    public static Territory getLastClickedTerritory() {
+        return lastClickedTerritory;
+    }
+    public static void setLastClickedTerritory(Territory t) {
+        lastClickedTerritory = t;
+    }
 }
