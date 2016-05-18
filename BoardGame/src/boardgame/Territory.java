@@ -55,11 +55,29 @@ public class Territory {
         }
         return false;
     }
-    public void addAdjacent(Territory t){
+    public void addCornerAdjacent(Territory t, Territory m, Territory d){
         adjacent.add(t);
+        adjacent.add(m);
+        adjacent.add(d);
     }
     
     public void handleClick() {
         Game.setLastClickedTerritory(this);
+    public void addSideAdjacent(Territory t, Territory m, Territory d, Territory e, Territory f){
+        adjacent.add(t);
+        adjacent.add(m);
+        adjacent.add(d);
+        adjacent.add(e);
+        adjacent.add(f);
+    }
+    public void addMiddleAdjacent(Territory t, Territory m, Territory d, Territory e, Territory f, Territory g, Territory b, Territory x){
+        adjacent.add(t);
+        adjacent.add(m);
+        adjacent.add(d);
+        adjacent.add(e);
+        adjacent.add(f);
+        adjacent.add(g);
+        adjacent.add(b);
+        adjacent.add(x);
     }
 }
