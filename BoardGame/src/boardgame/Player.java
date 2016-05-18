@@ -48,7 +48,14 @@ public class Player {
         units = u;
     }
     
+    public void refreshNumUnits() {
+        for (Continent c : Game.getContinents()) {
+            
+        }
+    }
+    
     public int getUnitsPerTurn() {
+        refreshNumUnits();
         return units;
     }
    

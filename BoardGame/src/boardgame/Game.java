@@ -10,10 +10,10 @@ package boardgame;
  * @author csstudent
  */
 public class Game {
-    private Player[] players;
-    private int currentTurn;
-    private String currentPhase;
-    private Continent[] continents;
+    private static Player[] players;
+    private static int currentTurn;
+    private static String currentPhase;
+    private static Continent[] continents;
     
     public Game(Player[] p, Continent[] c) {
         players = p;
@@ -25,25 +25,27 @@ public class Game {
         //...
     }
     
-    public Player[] getPlayers() {
+    public static Player[] getPlayers() {
         return players;
     }
-    public int getNumPlayers() {
+    public static int getNumPlayers() {
         return players.length;
     }
-    public int getCurrentTurn() {
+    public static int getCurrentTurn() {
         return currentTurn;
     }
-    public String getCurrentPhase() {
+    public static String getCurrentPhase() {
         return currentPhase;
     }
     
-    public void setCurrentPhase(String s) {
+    public static void setCurrentPhase(String s) {
         currentPhase = s;
     }
-    public void setCurrentTurn(int t) {
+    public static void setCurrentTurn(int t) {
         currentTurn = t;
     }
-
+    public static Continent[] getContinents() {
+        return continents;
+    }
     
 }

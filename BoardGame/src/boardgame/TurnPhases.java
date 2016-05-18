@@ -14,17 +14,11 @@ import java.util.TreeSet;
  */
 public class TurnPhases {
     
-    private static Game g;
-    
-    public static void setConnectedGame(Game game) {
-        g = game;
-    }
-    
     public TurnPhases() {
     }
     
     public static void reinforce(Player p) {
-        g.setCurrentPhase("reinforce");
+        Game.setCurrentPhase("reinforce");
         int numArmies = p.getUnitsPerTurn();
         //g.outText("Place armies on your territories. Left: " + numArmies);
         Territory t = new Territory(0, "", null);
@@ -38,7 +32,7 @@ public class TurnPhases {
     }
     
     public static void attack(Player p) {
-        g.setCurrentPhase("attack");
+        Game.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
         while (true) {
             Territory from = new Territory(0, "", null); 
@@ -70,7 +64,7 @@ public class TurnPhases {
     }
     
     public static void move(Player p) {
-        g.setCurrentPhase("move");
+        Game.setCurrentPhase("move");
         Territory from = new Territory(0, "", null);
         while (!from.getOccupied().equals(p) || from.getUnits() < 2) {
             //wait for player to click country and save it to 't'
@@ -91,7 +85,7 @@ public class TurnPhases {
         reinforce(p);
         attack(p);
         move(p);
-        g.setCurrentTurn((g.getCurrentTurn()+1) % g.getNumPlayers());
+        Game.setCurrentTurn((Game.getCurrentTurn()+1) % Game.getNumPlayers());
     }
     
     public static int diceRoll() {
