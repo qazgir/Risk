@@ -11,14 +11,17 @@ package boardgame;
  */
 public class Game {
     private static Player[] players;
-    private static int currentTurn;
+    private static int currentTurn = 0;
     private static String currentPhase;
     private static Continent[] continents;
+    private static Territory lastClickedTerritory;
     
-    public Game(Player[] p, Continent[] c) {
+    public static void setPlayers(Player[] p) {
         players = p;
+    }
+    
+    public static void setContinents(Continent[] c) {
         continents = c;
-        currentTurn = 0;
     }
     
     public static void outText(String s) {
@@ -48,4 +51,13 @@ public class Game {
         return continents;
     }
     
+    public static void resetLastClickedTerritory() {
+        lastClickedTerritory = new Territory(0, "", null);
+    }
+    public static Territory getLastClickedTerritory() {
+        return lastClickedTerritory;
+    }
+    public static void setLastClickedTerritory(Territory t) {
+        lastClickedTerritory = t;
+    }
 }
