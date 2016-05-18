@@ -60,7 +60,7 @@ public void startGame() throws IOException{
     Scene scene = new Scene(root);
     scene.getStylesheets().add(getClass().getResource("map.css").toExternalForm());
     stage2.setScene(scene);
-    MapController terrtoryCreater = new MapController();
+    MapController terrtoryCreater = fxmlLoader.getController();
     terrtoryCreater.createMVPTerratories();
     stage2.show();
     
