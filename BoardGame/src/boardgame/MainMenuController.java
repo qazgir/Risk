@@ -60,6 +60,42 @@ public void quit(){
 }
 
 public void startGame() throws IOException{
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Number of Players");
+    alert.setHeaderText("Player Selector");
+    alert.setContentText("How many players do you want?");
+
+    ButtonType buttonTypeTwo = new ButtonType("Two");    
+    ButtonType buttonTypeThree = new ButtonType("Three");
+    ButtonType buttonTypeFour = new ButtonType("Four");
+    ButtonType buttonTypeFive = new ButtonType("Five");
+    ButtonType buttonTypeSix = new ButtonType("Six");
+    ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+    alert.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeFive, buttonTypeSix, buttonTypeCancel);
+
+    Optional<ButtonType> result = alert.showAndWait();
+    //Not units per turn but starting units 
+    if(result.get() == buttonTypeTwo){
+        //Two people
+        this.startingUnits = 40;
+    }else if (result.get() == buttonTypeThree){
+        //Three people
+        this.startingUnits = 35;
+    } else if (result.get() == buttonTypeFour) {
+        //four people
+        this.startingUnits = 30;
+    } else if (result.get() == buttonTypeFive) {
+        //five people
+        this.startingUnits = 25;
+    } else if (result.get() == buttonTypeSix){
+        //six people
+        this.startingUnits = 20;
+    }else if(result.get() == buttonTypeCancel){
+        System.exit(0);
+        // ... user chose CANCEL or closed the dialog
+    }
+    
     MainMenuController.stage2 = BoardGame.stage;
     fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
     Parent root = fxmlLoader.load();
@@ -69,37 +105,7 @@ public void startGame() throws IOException{
     MapController terrtoryCreater = fxmlLoader.getController();
     terrtoryCreater.createMVPTerratories();
     stage2.show();
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Number of Players");
-        alert.setHeaderText("Player Selector");
-        alert.setContentText("How many players do you want?");
-
-        ButtonType buttonTypeTwo = new ButtonType("Two");    
-        ButtonType buttonTypeThree = new ButtonType("Three");
-        ButtonType buttonTypeFour = new ButtonType("Four");
-        ButtonType buttonTypeFive = new ButtonType("Five");
-        ButtonType buttonTypeSix = new ButtonType("Six");
-        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeFive, buttonTypeSix, buttonTypeCancel);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == buttonTypeTwo){
-            this.startingUnits = 40;
-        }else if (result.get() == buttonTypeThree){
-            this.startingUnits = 35;
-        } else if (result.get() == buttonTypeFour) {
-            this.startingUnits = 30;
-        } else if (result.get() == buttonTypeFive) {
-            this.startingUnits = 25;
-        } else if (result.get() == buttonTypeSix){
-            this.startingUnits = 20;
-        }else if(result.get() == buttonTypeCancel){
-            System.exit(0);
-            // ... user chose CANCEL or closed the dialog
-        }
     
 }
-
 }
 
