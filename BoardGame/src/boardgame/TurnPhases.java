@@ -5,14 +5,25 @@
  */
 package boardgame;
 
+import static boardgame.MainMenuController.fxmlLoader;
+import static boardgame.MainMenuController.stage2;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
  * @author csstudent
  */
 public class TurnPhases {
+    
+    private Stage stage3;
     
     public TurnPhases() {
     }
@@ -106,5 +117,27 @@ public class TurnPhases {
             out.add(i);
         }
         return out;
+    }
+    
+    public void victoryCheck(Player p){
+        boolean victory = true;
+        for(Continent c: Game.getContinents()){
+            if(c.getController() != p){
+                victory = false;
+            }
+        }
+        if(victory = true){
+            this.stage3 = BoardGame.stage;
+            fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Scene scene = new Scene(root);
+            stage2.setScene(scene);
+            stage2.show();
+        }
     }
 }
