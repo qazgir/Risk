@@ -147,12 +147,13 @@ private ImageView background;
             Parent root = null;
             try {
                 root = fxmlLoader.load();
+                Scene scene = new Scene(root);
+                stage2.setScene(scene);
+                stage2.show();
             } catch (IOException ex) {
                 Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Scene scene = new Scene(root);
-            stage2.setScene(scene);
-            stage2.show();
+            
         }
     }
     

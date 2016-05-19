@@ -26,11 +26,10 @@ public class WinController implements Initializable {
     @FXML
     private ImageView winscreen = new ImageView();
    
+    private Image image = new Image("http://65.media.tumblr.com/tumblr_l5jb2svg5Y1qc4y5qo1_500.jpg", 600, 480, false,  true);
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        File file = new File("/WIN");
-        Image image = new Image(file.toURI().toString());
         winscreen.setImage(image);
     }    
     
