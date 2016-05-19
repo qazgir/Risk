@@ -24,6 +24,7 @@ public class Territory {
         units = u;
         territoryName = s;
         linkedButton.setText(this.territoryName +":"+u);
+        linkedButton.setOnMouseClicked(event -> this.handleClick());
     }
     public void setController(Player n){
         controller = n;
@@ -58,6 +59,10 @@ public class Territory {
         adjacent.add(t);
         adjacent.add(m);
         adjacent.add(d);
+    }
+    
+    public void handleClick() {
+        Game.setLastClickedTerritory(this);
     }
     public void addSideAdjacent(Territory t, Territory m, Territory d, Territory e, Territory f){
         adjacent.add(t);

@@ -5,14 +5,25 @@
  */
 package boardgame;
 
+import static boardgame.MainMenuController.fxmlLoader;
+import static boardgame.MainMenuController.stage2;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  *
  * @author csstudent
  */
 public class TurnPhases {
+    
+    private Stage stage3;
     
     public TurnPhases() {
     }
@@ -22,6 +33,7 @@ public class TurnPhases {
         int numArmies = p.getUnitsPerTurn();
         //g.outText("Place armies on your territories. Left: " + numArmies);
         Territory t = new Territory(0, "", null);
+        Game.resetLastClickedTerritory();
         for (int i = 0; i < numArmies; i++) {
             t = new Territory(0, "", null);
             while (!(t.getOccupied().equals(p))) {
@@ -35,14 +47,16 @@ public class TurnPhases {
         Game.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
         while (true) {
-            Territory from = new Territory(0, "", null); 
+            Territory from = new Territory(0, "", null);
+            Game.resetLastClickedTerritory();
             while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
                 //wait for player to click country and save it to 't'
                 //If ENDPHASE button is pressed, return
             }
             Territory to = new Territory(0, "", null);
+            Game.resetLastClickedTerritory();
             while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
-                //wait for player to click country and save it to 't'
+                to = Game.getLastClickedTerritory();
             }
             while (to.getUnits() > 0 && from.getUnits() > 1) {
                 ArrayList<Integer> attackingDice = rollNumDice(Math.min(from.getUnits() - 1, 3));
@@ -66,12 +80,14 @@ public class TurnPhases {
     public static void move(Player p) {
         Game.setCurrentPhase("move");
         Territory from = new Territory(0, "", null);
+        Game.resetLastClickedTerritory();
         while (!from.getOccupied().equals(p) || from.getUnits() < 2) {
-            //wait for player to click country and save it to 't'
+            from = Game.getLastClickedTerritory();
         }
         Territory to = new Territory(0, "", null);
+        Game.resetLastClickedTerritory();
         while (!from.isAdjacent(to) || !to.getOccupied().equals(p)) {
-            //wait for player to click country and save it to 't'
+            to = Game.getLastClickedTerritory();
         }
         int units = -1;
         while (units < 1 || units >= from.getUnits()) {
@@ -101,5 +117,27 @@ public class TurnPhases {
             out.add(i);
         }
         return out;
+    }
+    
+    public void victoryCheck(Player p){
+        boolean victory = true;
+        for(Continent c: Game.getContinents()){
+            if(c.getController() != p){
+                victory = false;
+            }
+        }
+        if(victory = true){
+            this.stage3 = BoardGame.stage;
+            fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Scene scene = new Scene(root);
+            stage2.setScene(scene);
+            stage2.show();
+        }
     }
 }
