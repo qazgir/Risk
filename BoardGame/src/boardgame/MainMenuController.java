@@ -42,6 +42,8 @@ private Button play;
 @FXML
 private ImageView backgroundImage;
 
+public static boolean twoPlayer = true;
+
 private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg", 580, 450, true, true);     
 
 public static Stage stage2;
@@ -79,8 +81,10 @@ public void startGame() throws IOException{
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == buttonTypeTwo){
         this.startingUnits = 40;
+        twoPlayer = true;
     } else if (result.get() == buttonTypeThree) {
        this.startingUnits = 35;
+       System.out.println("pranked");
     } else if (result.get() == buttonTypeFour) {
         this.startingUnits = 30;
     } else if (result.get() == buttonTypeFour) {

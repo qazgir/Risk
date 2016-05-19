@@ -9,6 +9,7 @@ import static boardgame.MainMenuController.fxmlLoader;
 import static boardgame.MainMenuController.stage2;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,6 +126,12 @@ private ImageView background;
         t16.addCornerAdjacent(t15, t11, t12);
         Continent[] gameContinents = {c1, c2, c3, c4};
         Game.setContinents(gameContinents);
+        if(MainMenuController.twoPlayer == true){
+            ArrayList<Territory> p1T = new ArrayList<>();
+            Player p1 = new Player("Player 1", p1T);
+            ArrayList<Territory> p2T = new ArrayList<>();
+            Player p2 = new Player("Player 2", p2T);
+        }
         }
     
     public void victoryCheck(Player p){
