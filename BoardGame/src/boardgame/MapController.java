@@ -123,6 +123,8 @@ private ImageView background;
         t14.addSideAdjacent(t13, t15, t9, t10, t11);
         t15.addSideAdjacent(t14, t16, t10, t11, t12);
         t16.addCornerAdjacent(t15, t11, t12);
+        Continent[] gameContinents = {c1, c2, c3, c4};
+        Game.setContinents(gameContinents);
         }
     
     public void victoryCheck(Player p){
