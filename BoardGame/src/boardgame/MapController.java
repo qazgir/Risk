@@ -5,13 +5,22 @@
  */
 package boardgame;
 
+import static boardgame.MainMenuController.fxmlLoader;
+import static boardgame.MainMenuController.stage2;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -64,6 +73,7 @@ public Text playerIndic;
 
 @FXML
 private ImageView background;
+    private Stage stage3;
     /**
      * Initializes the controller class.
      */
@@ -114,4 +124,32 @@ private ImageView background;
         t15.addSideAdjacent(t14, t16, t10, t11, t12);
         t16.addCornerAdjacent(t15, t11, t12);
         }
+    
+    public void victoryCheck(Player p){
+        boolean victory = true;
+        for(Continent c: Game.getContinents()){
+            if(c.getController() != p){
+                victory = false;
+            }
+        }
+        if(victory = true){
+            this.stage3 = BoardGame.stage;
+            fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Scene scene = new Scene(root);
+            stage2.setScene(scene);
+            stage2.show();
+        }
+    }
+    
+   public void victoryCheck(){
+       Player p = new Player("Test", null);
+       victoryCheck(p);
+   }
+   
 }

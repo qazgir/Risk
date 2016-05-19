@@ -98,6 +98,7 @@ public void startGame() throws IOException{
     stage2.setScene(scene);
     MapController terrtoryCreater = fxmlLoader.getController();
     terrtoryCreater.createMVPTerritories();
+    stage2.setResizable(true);
     stage2.show();
     
 }

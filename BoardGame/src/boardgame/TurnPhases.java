@@ -118,26 +118,4 @@ public class TurnPhases {
         }
         return out;
     }
-    
-    public void victoryCheck(Player p){
-        boolean victory = true;
-        for(Continent c: Game.getContinents()){
-            if(c.getController() != p){
-                victory = false;
-            }
-        }
-        if(victory = true){
-            this.stage3 = BoardGame.stage;
-            fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Scene scene = new Scene(root);
-            stage2.setScene(scene);
-            stage2.show();
-        }
-    }
 }
