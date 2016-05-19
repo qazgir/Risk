@@ -43,6 +43,7 @@ public class Game {
     
     public static void setCurrentPhase(String s) {
         currentPhase = s;
+        //MapController.phaseIndic.setText(s);
     }
     public static void setCurrentTurn(int t) {
         currentTurn = t;
