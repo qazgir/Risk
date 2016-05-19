@@ -16,7 +16,7 @@ public class Territory {
     private int units;
     private final String territoryName;
     private Player controller;
-    private ArrayList<Territory> adjacent;
+    private ArrayList<Territory> adjacent = new ArrayList<Territory>();
     private final Button linkedButton;
     
     public Territory(int u, String s, Button b){
@@ -48,8 +48,8 @@ public class Territory {
         units = k;
     }
     public boolean isAdjacent(Territory t){
-        for (Territory adjacent1 : adjacent) {
-            if (t.equals(adjacent1)) {
+        for (int k = 0; k<adjacent.size(); k++) {
+            if (t.equals(adjacent.get(k))) {
                 return true;
             }
         }
