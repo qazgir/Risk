@@ -5,19 +5,21 @@
  */
 package boardgame;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author csstudent
  */
 public class Game {
-    private static Player[] players;
+    private static ArrayList<Player> players;
     private static int currentTurn = 0;
     private static String currentPhase;
     private static Continent[] continents;
     private static Player turnTaker;
     private static Territory lastClickedTerritory;
     
-    public static void setPlayers(Player[] p) {
+    public static void setPlayers(ArrayList<Player> p) {
         players = p;
     }
     
@@ -34,11 +36,11 @@ public class Game {
         //...
     }
     
-    public static Player[] getPlayers() {
+    public static ArrayList<Player> getPlayers() {
         return players;
     }
     public static int getNumPlayers() {
-        return players.length;
+        return players.size();
     }
     public static int getCurrentTurn() {
         return currentTurn;

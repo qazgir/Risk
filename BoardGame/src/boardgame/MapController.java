@@ -146,9 +146,9 @@ private ImageView background;
             Player p1 = new Player("Player 1", p1T);
             ArrayList<Territory> p2T = new ArrayList<>();
             Player p2 = new Player("Player 2", p2T);
-            Player[] p = null;
-            p[p.length] = p1;
-            p[p.length] = p2;
+            ArrayList<Player> p = new ArrayList<Player>();
+            p.add(p1);
+            p.add(p2);
             Game.setPlayers(p);
         }
         initialClaim2();
