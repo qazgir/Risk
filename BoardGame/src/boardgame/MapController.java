@@ -73,6 +73,8 @@ public Button button16;
 @FXML
 public Text phaseIndic;
 
+public boolean victory = false;
+
 @FXML
 private void handleButtonAction(ActionEvent event) {
     Game.setLastClickedTerritory(determineTerritory((Button) event.getSource())); 
@@ -88,6 +90,7 @@ public static Text playerIndic;
 @FXML
 private ImageView background;
     private Stage stage3;
+    
     /**
      * Initializes the controller class.
      */
@@ -144,6 +147,13 @@ private ImageView background;
             ArrayList<Territory> p2T = new ArrayList<>();
             Player p2 = new Player("Player 2", p2T);
         }
+        this.initialClaim2();
+        while(victory == false){
+            for(Player p: Game.getPlayers()){
+                TurnPhases.takeTurn(p);
+                victoryCheck(p);
+            }
+        }
         }
     
     public void getButton(){
@@ -161,7 +171,7 @@ private ImageView background;
     
     public void initialClaim2(){
         for(Player p: Game.getPlayers()){
-            while(p.getTerritories() == null){
+            while(p.getTerritories().isEmpty()){
                 Alert intitlalClaimInstructions = new Alert(AlertType.CONFIRMATION);
                 intitlalClaimInstructions.setContentText("Please click on the territory you would like to start in.");
                 ButtonType instructionsUnderstood = new ButtonType("Got it.");
@@ -187,7 +197,7 @@ private ImageView background;
     }
     
     public void victoryCheck(Player p){
-        boolean victory = true;
+        victory = true;
         for(Continent c: Game.getContinents()){
             if(c.getController() != p){
                 victory = false;
