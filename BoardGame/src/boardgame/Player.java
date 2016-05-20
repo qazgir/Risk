@@ -22,6 +22,7 @@ public class Player {
         units = 3;
         this.name = name;
         territories = myTerritory;
+        
     }
     
     public ArrayList<Territory> getTerritories(){

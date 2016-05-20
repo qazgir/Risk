@@ -146,8 +146,12 @@ private ImageView background;
             Player p1 = new Player("Player 1", p1T);
             ArrayList<Territory> p2T = new ArrayList<>();
             Player p2 = new Player("Player 2", p2T);
+            Player[] p = null;
+            p[p.length] = p1;
+            p[p.length] = p2;
+            Game.setPlayers(p);
         }
-        this.initialClaim2();
+        initialClaim2();
         while(victory == false){
             for(Player p: Game.getPlayers()){
                 TurnPhases.takeTurn(p);
