@@ -7,6 +7,7 @@ package boardgame;
 
 import static boardgame.MainMenuController.fxmlLoader;
 import static boardgame.MainMenuController.stage2;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -67,6 +69,10 @@ public Button button16;
 @FXML
 public Text phaseIndic;
 
+@FXML
+private void handleButtonAction(ActionEvent event) {
+    Game.setLastClickedTerritory(determineTerritory((Button) event.getSource())); 
+}
 private Territory t;
 
 @FXML
@@ -83,7 +89,6 @@ private ImageView background;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       int bah = 2;
     }    
     
     public void createMVPTerritories(){
@@ -150,6 +155,14 @@ private ImageView background;
         }
     }
     
+    public void initialClaim2(){
+        for(Player p: Game.getPlayers()){
+            while(p.getTerritories() == null){
+                
+            }
+        }
+    }
+    
     public void victoryCheck(Player p){
         boolean victory = true;
         for(Continent c: Game.getContinents()){
@@ -176,6 +189,17 @@ private ImageView background;
    public void victoryCheck(){
        Player p = new Player("Test", null);
        victoryCheck(p);
+   }
+   
+   public Territory determineTerritory(Button b){
+       for(Continent c: Game.getContinents()){
+           for(Territory t: c.getTerritory()){
+               if(t.getLinkedButton() == b){
+                   return t;
+               }
+           }
+       }
+       return null;
    }
    
 }

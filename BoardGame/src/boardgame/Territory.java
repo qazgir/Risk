@@ -81,4 +81,8 @@ public class Territory {
         adjacent.add(b);
         adjacent.add(x);
     }
+    
+    public Button getLinkedButton(){
+        return linkedButton;
+    }
 }

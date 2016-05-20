@@ -24,7 +24,9 @@ public class Player {
         territories = myTerritory;
     }
     
-  
+    public ArrayList<Territory> getTerritories(){
+        return territories;
+    }
  
     public boolean isControlling(Territory t){
         for (Territory territorie : territories) {
@@ -69,5 +71,4 @@ public class Player {
     public String getName(){
         return name;
     }
-   
 }
