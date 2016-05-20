@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -158,7 +162,26 @@ private ImageView background;
     public void initialClaim2(){
         for(Player p: Game.getPlayers()){
             while(p.getTerritories() == null){
-                
+                Alert intitlalClaimInstructions = new Alert(AlertType.CONFIRMATION);
+                intitlalClaimInstructions.setContentText("Please click on the territory you would like to start in.");
+                ButtonType instructionsUnderstood = new ButtonType("Got it.");
+                intitlalClaimInstructions.getButtonTypes().setAll(instructionsUnderstood);
+                Optional<ButtonType> result = intitlalClaimInstructions.showAndWait();
+                if(result.get() == instructionsUnderstood){
+                    System.exit(0);
+                }
+                if(Game.getLastClickedTerritory() != null && Game.getLastClickedTerritory().getOccupied() == false){
+                    p.addTerritory(Game.getLastClickedTerritory());
+                } else {
+                    Alert territoryAllReadyClaimed = new Alert(AlertType.CONFIRMATION);
+                territoryAllReadyClaimed.setContentText("Please choose a unoccupied territory.");
+                ButtonType gotIt = new ButtonType("Got it.");
+                territoryAllReadyClaimed.getButtonTypes().setAll(instructionsUnderstood);
+                Optional<ButtonType> result2 = territoryAllReadyClaimed.showAndWait();
+                if(result.get() == instructionsUnderstood){
+                    System.exit(0);
+                }
+                }
             }
         }
     }

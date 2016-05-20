@@ -28,9 +28,9 @@ public class Continent {
     }
     
     public boolean getControlled(){
-        Player controller = territories[0].getOccupied();
+        Player controller = territories[0].getController();
         for (Territory t : territories) {
-            if(t.getOccupied()!=controller){
+            if(t.getController()!=controller){
                 return false;
             }
         }
@@ -38,7 +38,7 @@ public class Continent {
     }
     public Player getController() {
         if (getControlled()) {
-            return territories[0].getOccupied();
+            return territories[0].getController();
         } else {
             return null;
         }

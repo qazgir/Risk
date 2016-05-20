@@ -37,7 +37,15 @@ public class Territory {
         return territoryName;
     }
     
-    public Player getOccupied(){
+    public boolean getOccupied(){
+        if(controller == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public Player getController(){
         return controller;
     }
     

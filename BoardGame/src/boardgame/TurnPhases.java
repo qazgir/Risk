@@ -28,7 +28,7 @@ public class TurnPhases {
         Game.resetLastClickedTerritory();
         for (int i = 0; i < numArmies; i++) {
             t = new Territory(0, "", null);
-            while (!(t.getOccupied().equals(p))) {
+            while (!(t.getController().equals(p))) {
                 //wait for player to click country and save it to 't'
             }
             t.changeUnits(t.getUnits()+ 1);
@@ -41,13 +41,13 @@ public class TurnPhases {
         while (true) {
             Territory from = new Territory(0, "", null);
             Game.resetLastClickedTerritory();
-            while (!(from.getOccupied().equals(p) && from.getUnits()>=2)) {
+            while (!(from.getController().equals(p) && from.getUnits()>=2)) {
                 //wait for player to click country and save it to 't'
                 //If ENDPHASE button is pressed, return
             }
             Territory to = new Territory(0, "", null);
             Game.resetLastClickedTerritory();
-            while (to.getOccupied().equals(p) || !(from.isAdjacent(to))) {
+            while (to.getController().equals(p) || !(from.isAdjacent(to))) {
                 to = Game.getLastClickedTerritory();
             }
             while (to.getUnits() > 0 && from.getUnits() > 1) {
@@ -63,7 +63,7 @@ public class TurnPhases {
                 //option for attacker to surrender; if so, break from loop
             }
             if (to.getUnits() <= 0) {
-                to.getOccupied().surrenderTerritory(to, p);
+                to.getController().surrenderTerritory(to, p);
                 //move Player p's units to Territory 'to'
             }
         }
@@ -73,12 +73,12 @@ public class TurnPhases {
         Game.setCurrentPhase("move");
         Territory from = new Territory(0, "", null);
         Game.resetLastClickedTerritory();
-        while (!from.getOccupied().equals(p) || from.getUnits() < 2) {
+        while (!from.getController().equals(p) || from.getUnits() < 2) {
             from = Game.getLastClickedTerritory();
         }
         Territory to = new Territory(0, "", null);
         Game.resetLastClickedTerritory();
-        while (!from.isAdjacent(to) || !to.getOccupied().equals(p)) {
+        while (!from.isAdjacent(to) || !to.getController().equals(p)) {
             to = Game.getLastClickedTerritory();
         }
         int units = -1;
