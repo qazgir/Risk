@@ -70,7 +70,7 @@ public Text phaseIndic;
 public Button advancePhase;
 
 @FXML
-public Text playerIndic;
+public static Text playerIndic;
 
 @FXML
 private ImageView background;

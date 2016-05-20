@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Player {
     private int units;
-    private String name;
+    private final String name;
     private ArrayList<Territory> territories;
    
     public Player(String name, ArrayList<Territory> myTerritory){
@@ -31,10 +31,7 @@ public class Player {
         }
         return false;
     }
-    public String eleGiggle(){
-        System.out.println("Forsen is love. Forsen is life. Forsen's hair looks very nice. Forsen is sexy, and he rock. I just want to suck on his Swedish Meatballs. Love, Alex the Seal. FrankerZ FrankerZ");
-        return "TriHard";
-    }
+    
     public void addTerritory(Territory t) {
         if (!isControlling(t)) {
             territories.add(t);
@@ -64,6 +61,10 @@ public class Player {
     public int getUnitsPerTurn() {
         refreshNumUnits();
         return units;
+    }
+    
+    public String getName(){
+        return name;
     }
    
 }

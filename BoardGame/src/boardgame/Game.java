@@ -14,6 +14,7 @@ public class Game {
     private static int currentTurn = 0;
     private static String currentPhase;
     private static Continent[] continents;
+    private static Player turnTaker;
     private static Territory lastClickedTerritory;
     
     public static void setPlayers(Player[] p) {
@@ -22,6 +23,11 @@ public class Game {
     
     public static void setContinents(Continent[] c) {
         continents = c;
+    }
+    
+    public static void setTurnTaker(Player p){
+        turnTaker = p;
+        MapController.playerIndic.setText(p.getName());
     }
     
     public static void outText(String s) {
