@@ -94,6 +94,13 @@ public void startGame() throws IOException{
     }else if (result.get() == buttonTypeCancel){
         System.exit(0);
     }
+    
+    if(twoPlayer = true){
+        Player p1 = new Player("forseen",null);
+        Player p2 = new Player("TaiLopez",null);
+    }else{
+        System.out.print("Pranked");
+    }
     MainMenuController.stage2 = BoardGame.stage;
     fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
     Parent root = fxmlLoader.load();

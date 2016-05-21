@@ -1,6 +1,7 @@
 package boardgame;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +24,8 @@ public class Player {
         territories = myTerritory;
     }
     
+  
+ 
     public boolean isControlling(Territory t){
         for (Territory territorie : territories) {
             if (territorie.equals(t)) {

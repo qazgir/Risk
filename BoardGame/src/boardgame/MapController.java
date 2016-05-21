@@ -10,6 +10,7 @@ import static boardgame.MainMenuController.stage2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,6 +66,8 @@ public Button button16;
     
 @FXML
 public Text phaseIndic;
+
+private Territory t;
 
 @FXML
 public Button advancePhase;
@@ -133,6 +136,19 @@ private ImageView background;
             Player p2 = new Player("Player 2", p2T);
         }
         }
+    
+    public void getButton(){
+        t = Game.getLastClickedTerritory();
+    }
+    
+    
+    public void initialClaim(Territory p){
+        p = t;
+        for(Player player : Game.getPlayers()){
+            player.addTerritory(p);
+            
+        }
+    }
     
     public void victoryCheck(Player p){
         boolean victory = true;
