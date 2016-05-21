@@ -128,9 +128,7 @@ private ImageView background;
     }    
     
     public void createMVPTerritories(){
-  
         Territory t1 = new Territory(0, "JackyMayo", button1);
-        
         Territory t2 = new Territory(0, "EE-Sama", button2);
         Territory t3 = new Territory(0, "RTZBabyrage", button3);
         Territory t4 = new Territory(0, "EnChuanTress", button4);
@@ -146,6 +144,7 @@ private ImageView background;
         Territory t14 = new Territory(0, "DC>>MemeArrows", button14);
         Territory t15 = new Territory(0, "Keepo", button15);
         Territory t16 = new Territory(0, "SinGSonG", button16);
+        
         Territory[] TArray1= {t1, t2, t3, t4};
         Territory[] TArray2= {t5, t6, t7, t8};
         Territory[] TArray3= {t9, t10, t11, t12};
@@ -156,6 +155,7 @@ private ImageView background;
         c2 = new Continent(4, "Continent2",TArray2);
         c3 = new Continent(4, "Continent3",TArray3);
         c4 = new Continent(4, "Continent4",TArray4);
+        
         t1.addCornerAdjacent(t2, t6, t5);
         t2.addSideAdjacent(t1, t3, t7, t5, t6);
         t3.addSideAdjacent(t2, t4, t6, t7, t8);
@@ -186,46 +186,7 @@ private ImageView background;
             }
         }
         }
-    
-    
-    
-    
-    /*public void initialClaim(){
-        for(Player p: Game.getPlayers()){
-            if(p.getTerritories().isEmpty()){
-                Alert intitlalClaimInstructions = new Alert(AlertType.CONFIRMATION);
-                intitlalClaimInstructions.setContentText("Please click on the territory you would like to start in.");
-                ButtonType instructionsUnderstood = new ButtonType("Got it.");
-                intitlalClaimInstructions.getButtonTypes().setAll(instructionsUnderstood);
-                Optional<ButtonType> result = intitlalClaimInstructions.showAndWait();
-                if(result.get() == instructionsUnderstood){
-                
-                }
-           
-                
-                if(Game.getLastClickedTerritory() != null && Game.getLastClickedTerritory().getOccupied() == false){
-                    p.addTerritory(Game.getLastClickedTerritory());
-                    
-                }
-                
-                if(Game.getLastClickedTerritory() != null && Game.getLastClickedTerritory().getOccupied() == true){
-                        Alert territoryAllReadyClaimed = new Alert(AlertType.CONFIRMATION);
-                territoryAllReadyClaimed.setContentText("Please choose a unoccupied territory.");
-                ButtonType gotIt = new ButtonType("Got it.");
-                territoryAllReadyClaimed.getButtonTypes().setAll(instructionsUnderstood);
-                Optional<ButtonType> result2 = territoryAllReadyClaimed.showAndWait();
-                if(result2.get() == instructionsUnderstood){
-                    
-                }
-            }
-        
-        }
-    }
-            
-        
-   
-    
-    }*/
+
     
     public void initialClaim(){
         boolean redpicked = false;
@@ -429,5 +390,5 @@ private ImageView background;
        }
        return null;
    }
-   
+
 }
