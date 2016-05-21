@@ -84,6 +84,15 @@ public Text playerIndic;
 
 public boolean victory = false;
 
+public Continent c1 = null;
+
+public Continent c2 = null;
+
+public Continent c3 = null;
+
+public Continent c4 = null;
+
+
 @FXML
 private void handleButtonAction(ActionEvent event) {
     
@@ -143,10 +152,10 @@ private ImageView background;
         Territory[] TArray4= {t13, t14, t15, t16};
         Territory[] gameTerritories= {t1, t2, t3, t4,t5, t6, t7, t8,t9, t10, t11, t12,t13, t14, t15, t16};
        
-        Continent c1 = new Continent(4, "Continent1",TArray1);
-        Continent c2 = new Continent(4, "Continent2",TArray2);
-        Continent c3 = new Continent(4, "Continent3",TArray3);
-        Continent c4 = new Continent(4, "Continent4",TArray4);
+        c1 = new Continent(4, "Continent1",TArray1);
+        c2 = new Continent(4, "Continent2",TArray2);
+        c3 = new Continent(4, "Continent3",TArray3);
+        c4 = new Continent(4, "Continent4",TArray4);
         t1.addCornerAdjacent(t2, t6, t5);
         t2.addSideAdjacent(t1, t3, t7, t5, t6);
         t3.addSideAdjacent(t2, t4, t6, t7, t8);
@@ -172,8 +181,8 @@ private ImageView background;
             for(int i = 0; i < t.size(); i++){
                 temp = t.get(i);
                 //Game.setTurnTaker(temp);
-                TurnPhases.takeTurn(temp);
-                victoryCheck(temp);
+                //TurnPhases.takeTurn(temp);
+                //victoryCheck(temp);
             }
         }
         }
@@ -219,6 +228,10 @@ private ImageView background;
     }*/
     
     public void initialClaim(){
+        boolean redpicked = false;
+        boolean pinkpicked = false;
+        boolean greenpicked = false;
+        boolean bluepicked = false;
         if(MainMenuController.twoPlayer == true){
             ArrayList<Territory> p1T = new ArrayList<>();
             Player p1 = new Player("Player 1", p1T);
@@ -242,17 +255,61 @@ private ImageView background;
                     alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == buttonTypeOne) {
-                        TerritoryAlert(p.get(i));
-                        startContinent = "red";
+                        if(redpicked == false){
+                            redpicked = true;
+                            TerritoryAlert(p.get(i), c1);
+                            startContinent = "red";
+                        } else {
+                            Alert confirm = new Alert(AlertType.CONFIRMATION);
+                            confirm.setTitle("Allready occupied territory");
+                            confirm.setContentText("That continent is allready occupied");
+                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                            confirm.getButtonTypes().setAll(okButton);
+                            confirm.showAndWait();
+                            alert.showAndWait();
+                        }
                     }else if (result.get() == buttonTypeTwo){
-                         TerritoryAlert(p.get(i));
-                         startContinent = "pink";
+                         if(pinkpicked == false){
+                             pinkpicked = true;
+                             TerritoryAlert(p.get(i), c2);
+                             startContinent = "pink";
+                         } else {
+                            Alert confirm = new Alert(AlertType.CONFIRMATION);
+                            confirm.setTitle("Allready occupied territory");
+                            confirm.setContentText("That continent is allready occupied");
+                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                            confirm.getButtonTypes().setAll(okButton);
+                            confirm.showAndWait();
+                            alert.showAndWait();
+                        }
                     } else if (result.get() == buttonTypeThree) {
-                        TerritoryAlert(p.get(i));
-                        startContinent = "blue";
+                        if(bluepicked == false){
+                            bluepicked = true;
+                            TerritoryAlert(p.get(i), c3);
+                            startContinent = "blue";
+                        }  else {
+                            Alert confirm = new Alert(AlertType.CONFIRMATION);
+                            confirm.setTitle("Allready occupied territory");
+                            confirm.setContentText("That continent is allready occupied");
+                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                            confirm.getButtonTypes().setAll(okButton);
+                            confirm.showAndWait();
+                            alert.showAndWait();
+                        }
                     } else if (result.get() == buttonTypeFour) {
-                        TerritoryAlert(p.get(i));
-                        startContinent = "green";
+                        if(greenpicked == false){
+                            greenpicked = true;
+                            TerritoryAlert(p.get(i), c4);
+                            startContinent = "green";
+                        }  else {
+                            Alert confirm = new Alert(AlertType.CONFIRMATION);
+                            confirm.setTitle("Allready occupied territory");
+                            confirm.setContentText("That continent is allready occupied");
+                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                            confirm.getButtonTypes().setAll(okButton);
+                            confirm.showAndWait();
+                            alert.showAndWait();
+                        }
                     }else if (result.get() == buttonTypeCancel){
                         System.exit(0);
                     }
@@ -268,15 +325,15 @@ private ImageView background;
     }
     
     
-    public void TerritoryAlert(Player p){
+    public void TerritoryAlert(Player p, Continent c){
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Territory");
         alert.setHeaderText("Choose the territory");
         alert.setContentText("What territory would you like to start in?");
-        ButtonType buttonTypeOne = new ButtonType("One");
-        ButtonType buttonTypeTwo = new ButtonType("Two");
-        ButtonType buttonTypeThree = new ButtonType("Three");
-        ButtonType buttonTypeFour = new ButtonType("Four");
+        ButtonType buttonTypeOne = new ButtonType(c.getTerritory()[0].getName());
+        ButtonType buttonTypeTwo = new ButtonType(c.getTerritory()[1].getName());
+        ButtonType buttonTypeThree = new ButtonType(c.getTerritory()[2].getName());
+        ButtonType buttonTypeFour = new ButtonType(c.getTerritory()[3].getName());
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
