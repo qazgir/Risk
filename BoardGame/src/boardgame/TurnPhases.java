@@ -5,16 +5,8 @@
  */
 package boardgame;
 
-import static boardgame.MainMenuController.fxmlLoader;
-import static boardgame.MainMenuController.stage2;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -98,6 +90,7 @@ public class TurnPhases {
     }
     
     public static void takeTurn(Player p) {
+        Game.setTurnTaker(p);
         reinforce(p);
         attack(p);
         move(p);
