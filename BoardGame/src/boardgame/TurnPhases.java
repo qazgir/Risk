@@ -20,7 +20,7 @@ public class TurnPhases {
     public TurnPhases() {
     }
     
-    public static void reinforce(Player p) {
+    /*public static void reinforce(Player p) {
         Game.setCurrentPhase("reinforce");
         int numArmies = p.getUnitsPerTurn();
         //g.outText("Place armies on your territories. Left: " + numArmies);
@@ -34,8 +34,23 @@ public class TurnPhases {
             }
             t.changeUnits(t.getUnits()+ 1);
         }
+    }*/
+    
+    public static void reinforce(Player p) {
+        Game.setCurrentPhase("reinforce");
+        int numArmies = p.getUnitsPerTurn();
+        while(numArmies > 0){
+            if(Game.getLastClickedTerritory() == null){
+                Territory t = Game.getLastClickedTerritory();
+                if(t.getController().equals(p)){
+                    t.changeUnits(t.getUnits()+ 1);
+                    numArmies = numArmies - 1;
+                }
+            }    
+        }
     }
     
+
     public static void attack(Player p) {
         Game.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
