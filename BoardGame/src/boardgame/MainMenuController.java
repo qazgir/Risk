@@ -99,7 +99,7 @@ public void startGame() throws IOException{
         Player p1 = new Player("forseen",null);
         Player p2 = new Player("TaiLopez",null);
     }else{
-        System.out.print("Pranked");
+        System.exit(0);
     }
     MainMenuController.stage2 = BoardGame.stage;
     fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
@@ -107,8 +107,8 @@ public void startGame() throws IOException{
     Scene scene = new Scene(root);
     scene.getStylesheets().add(getClass().getResource("map.css").toExternalForm());
     stage2.setScene(scene);
-    MapController terrtoryCreater = fxmlLoader.getController();
-    terrtoryCreater.createMVPTerritories();
+    MapController terrtoryCreator = fxmlLoader.getController();
+    terrtoryCreator.createMVPTerritories();
     stage2.setResizable(true);
     stage2.show();
     

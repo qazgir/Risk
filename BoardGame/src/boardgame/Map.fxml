@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.MapController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgame.MapController">
    <children>
       <Button fx:id="button1" layoutX="53.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ffb3b3;" styleClass="button1" stylesheets="@map.css" text="Button" wrapText="true" AnchorPane.bottomAnchor="299.0" AnchorPane.rightAnchor="452.0" AnchorPane.topAnchor="1.0" />
       <Button fx:id="button2" layoutX="199.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ffb3b3;" styleClass="button2" stylesheets="@map.css" text="Button" wrapText="true" AnchorPane.topAnchor="1.0" />
@@ -19,21 +15,21 @@
       <Button fx:id="button6" layoutX="199.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ffccff;" styleClass="button6" stylesheets="@map.css" text="Button" wrapText="true" />
       <Button fx:id="button7" layoutX="350.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ffccff;" styleClass="button7" stylesheets="@map.css" text="Button" wrapText="true" />
       <Button fx:id="button8" layoutX="499.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ffccff;" styleClass="button8" stylesheets="@map.css" text="Button" wrapText="true" />
-      <Button fx:id="button9" layoutX="53.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button9" stylesheets="@../../../../../../../../../../Users/csstudent/Desktop/project/Risk/BoardGame/src/boardgame/map.css" text="Button" wrapText="true" />
-      <Button fx:id="button10" layoutX="199.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button10" stylesheets="@../../../../../../../../../../Users/csstudent/Desktop/project/Risk/BoardGame/src/boardgame/map.css" text="Button" wrapText="true" />
-      <Button fx:id="button11" layoutX="350.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button11" stylesheets="@../../../../../../../../../../Users/csstudent/Desktop/project/Risk/BoardGame/src/boardgame/map.css" text="Button" wrapText="true" />
-      <Button fx:id="button12" layoutX="499.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button12" stylesheets="@../../../../../../../../../../Users/csstudent/Desktop/project/Risk/BoardGame/src/boardgame/map.css" text="Button" wrapText="true" />
+      <Button fx:id="button9" layoutX="53.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button9" text="Button" wrapText="true" />
+      <Button fx:id="button10" layoutX="199.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button10" text="Button" wrapText="true" />
+      <Button fx:id="button11" layoutX="350.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button11" text="Button" wrapText="true" />
+      <Button fx:id="button12" layoutX="499.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccf5ff;" styleClass="button12" text="Button" wrapText="true" />
       <Button fx:id="button13" layoutX="54.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccffcc;" styleClass="button13" stylesheets="@map.css" text="Button" wrapText="true" />
       <Button fx:id="button14" layoutX="199.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccffcc;" styleClass="button14" stylesheets="@map.css" text="Button" wrapText="true" />
       <Button fx:id="button15" layoutX="350.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="145.0" style="-fx-background-color: ccffcc;" styleClass="button15" stylesheets="@map.css" text="Button" wrapText="true" />
       <Button fx:id="button16" layoutX="499.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="99.0" prefWidth="145.0" style="-fx-background-color: ccffcc;" styleClass="button16" stylesheets="@map.css" text="Button" wrapText="true" />
-      <Text fx:id="playerIndic" layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
+      <Text fx:id="playerIndic1" layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
+      <Text fx:id="playerIndic" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Button fx:id="advancePhase" layoutX="-2.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#victoryCheck" prefHeight="99.0" prefWidth="52.0" text="Advance Phase/ Surrender" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="598.0" AnchorPane.topAnchor="301.0">
          <font>
             <Font size="8.0" />
          </font>
       </Button>
-      <Text fx:id="playerindic1" layoutX="12.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fx:id="phaseIndic1" layoutX="7.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phase:" />
       <Text fx:id="phaseIndic" layoutX="13.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>

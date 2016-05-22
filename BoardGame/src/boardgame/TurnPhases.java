@@ -90,7 +90,7 @@ public class TurnPhases {
     }
     
     public static void takeTurn(Player p) {
-        Game.setTurnTaker(p);
+        //Game.setTurnTaker(p);
         reinforce(p);
         attack(p);
         move(p);

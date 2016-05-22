@@ -18,19 +18,27 @@ public class Game {
     private static Continent[] continents;
     private static Player turnTaker;
     private static Territory lastClickedTerritory;
+    private static String name;
+    private static Territory[] territories;
     
     public static void setPlayers(ArrayList<Player> p) {
         players = p;
     }
     
+    
     public static void setContinents(Continent[] c) {
         continents = c;
     }
     
-    public static void setTurnTaker(Player p){
-        turnTaker = p;
-        MapController.playerIndic.setText(p.getName());
-    }
+    /*public static void setTurnTaker(Player p){
+        if(players != null){    
+            turnTaker = p;
+            name = p.getpName();
+            MapController.playerIndic.setText("player");
+        }else{
+            
+        }
+    }*/
     
     public static void outText(String s) {
         //...
@@ -48,7 +56,13 @@ public class Game {
     public static String getCurrentPhase() {
         return currentPhase;
     }
+    public static Territory[] getTerritories(){
+        return territories;
+    }
     
+    public static void setTerritories(Territory[] t){
+        territories = t; 
+    }
     public static void setCurrentPhase(String s) {
         currentPhase = s;
         //MapController.phaseIndic.setText(s);

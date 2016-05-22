@@ -15,12 +15,12 @@ import java.util.Arrays;
  */
 public class Player {
     private int units;
-    private final String name;
+    private String pName;
     private ArrayList<Territory> territories;
    
     public Player(String name, ArrayList<Territory> myTerritory){
         units = 3;
-        this.name = name;
+        pName = name;
         territories = myTerritory;
         
     }
@@ -69,7 +69,7 @@ public class Player {
         return units;
     }
     
-    public String getName(){
-        return name;
+    public String getpName(){
+        return pName;
     }
 }

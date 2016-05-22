@@ -26,6 +26,11 @@ public class Territory {
         linkedButton.setText(this.territoryName +":"+u);
         linkedButton.setOnMouseClicked(event -> this.handleClick());
     }
+    
+    public Button getButton(){
+        return linkedButton; 
+    }
+    
     public void setController(Player n){
         controller = n;
         //b.setOnMouseClicked(Put in method 'this.handleClick()');
