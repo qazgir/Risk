@@ -18,6 +18,7 @@ public class Game {
     private static Continent[] continents;
     private static Player turnTaker;
     private static Territory lastClickedTerritory;
+    private static boolean advancePhase = false;
     
     public static void setPlayers(ArrayList<Player> p) {
         players = p;
@@ -68,5 +69,15 @@ public class Game {
     }
     public static void setLastClickedTerritory(Territory t) {
         lastClickedTerritory = t;
+    }
+    
+    public static void resetAdvancePhase() {
+        advancePhase = false;
+    }
+    public static boolean getAdvancePhase() {
+        return advancePhase;
+    }
+    public static void activateAdvancePhase() {
+        advancePhase = true;
     }
 }

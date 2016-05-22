@@ -153,17 +153,20 @@ private ImageView background;
         }
         initialClaim2();
         while(victory == false){
-            for(Player p: Game.getPlayers()){
+            for (Player p : Game.getPlayers()){
                 TurnPhases.takeTurn(p);
                 victoryCheck(p);
             }
         }
-        }
+    }
     
     public void getButton(){
         t = Game.getLastClickedTerritory();
     }
     
+    public void handleAdvancePhase() {
+        Game.activateAdvancePhase();
+    }
     
     public void initialClaim(Territory p){
         p = t;

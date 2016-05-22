@@ -6,7 +6,9 @@
 package boardgame;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.TreeSet;
+import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Stage;
 
 /**
@@ -28,8 +30,9 @@ public class TurnPhases {
         Game.resetLastClickedTerritory();
         for (int i = 0; i < numArmies; i++) {
             t = new Territory(0, "", null);
+            Game.resetLastClickedTerritory();
             while (!(t.getController().equals(p))) {
-                //wait for player to click country and save it to 't'
+                t = Game.getLastClickedTerritory();
             }
             t.changeUnits(t.getUnits()+ 1);
         }
@@ -41,9 +44,12 @@ public class TurnPhases {
         while (true) {
             Territory from = new Territory(0, "", null);
             Game.resetLastClickedTerritory();
+            Game.resetAdvancePhase();
             while (!(from.getController().equals(p) && from.getUnits()>=2)) {
-                //wait for player to click country and save it to 't'
-                //If ENDPHASE button is pressed, return
+                from = Game.getLastClickedTerritory();
+                if (Game.getAdvancePhase()) {
+                    return;
+                }
             }
             Territory to = new Territory(0, "", null);
             Game.resetLastClickedTerritory();
@@ -60,11 +66,14 @@ public class TurnPhases {
                         from.changeUnits(from.getUnits()-1);
                     }
                 }
-                //option for attacker to surrender; if so, break from loop
+                //Delay execution...
+                if (Game.getAdvancePhase()) {
+                    break;
+                }
             }
             if (to.getUnits() <= 0) {
                 to.getController().surrenderTerritory(to, p);
-                //move Player p's units to Territory 'to'
+                moveSingle(from, to);
             }
         }
     }
@@ -81,9 +90,22 @@ public class TurnPhases {
         while (!from.isAdjacent(to) || !to.getController().equals(p)) {
             to = Game.getLastClickedTerritory();
         }
-        int units = -1;
-        while (units < 1 || units >= from.getUnits()) {
-            //Ask player how many units they want to move and save it to int 'units'
+        moveSingle(from, to);
+    }
+    
+    private static void moveSingle(Territory from, Territory to) {
+        ArrayList<Integer> choices = new ArrayList<Integer>();
+        for (int i = 0; i < from.getUnits(); i++) {
+            choices.add(i);
+        }
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<Integer>(1, choices);
+        dialog.setTitle("Move Units");
+        dialog.setHeaderText("Choose number of units to move from " + from.getName() + " to " + to.getName());
+        dialog.setContentText("Choose a number:");
+        Optional<Integer> result = dialog.showAndWait();
+        int units = 0;
+        if (result.isPresent()) {
+            units = result.get();
         }
         from.changeUnits(from.getUnits() - units);
         to.changeUnits(to.getUnits() + units);
