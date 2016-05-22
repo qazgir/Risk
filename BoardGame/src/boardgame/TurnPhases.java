@@ -66,9 +66,11 @@ public class TurnPhases {
                         from.changeUnits(from.getUnits()-1);
                     }
                 }
-                //Delay execution...
-                if (Game.getAdvancePhase()) {
-                    break;
+                Game.resetLastClickedTerritory();
+                while (!Game.getLastClickedTerritory().equals(to)) {
+                    if (Game.getAdvancePhase()) {
+                        break;
+                    }
                 }
             }
             if (to.getUnits() <= 0) {
