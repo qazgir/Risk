@@ -219,8 +219,8 @@ private ImageView background;
                     if (result.get() == buttonTypeOne) {
                         if(redpicked == false){
                             redpicked = true;
-                            TerritoryAlert(p.get(i), c1);
                             startContinent = "red";
+                            TerritoryAlert(p.get(i), c1);
                         } else {
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
@@ -232,9 +232,9 @@ private ImageView background;
                         }
                     }else if (result.get() == buttonTypeTwo){
                          if(pinkpicked == false){
-                             pinkpicked = true;
-                             TerritoryAlert(p.get(i), c2);
-                             startContinent = "pink";
+                            pinkpicked = true;
+                            startContinent = "pink";
+                            TerritoryAlert(p.get(i), c2);
                          } else {
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
@@ -247,8 +247,8 @@ private ImageView background;
                     } else if (result.get() == buttonTypeThree) {
                         if(bluepicked == false){
                             bluepicked = true;
-                            TerritoryAlert(p.get(i), c3);
                             startContinent = "blue";
+                            TerritoryAlert(p.get(i), c3);
                         }  else {
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
@@ -261,8 +261,8 @@ private ImageView background;
                     } else if (result.get() == buttonTypeFour) {
                         if(greenpicked == false){
                             greenpicked = true;
-                            TerritoryAlert(p.get(i), c4);
                             startContinent = "green";
+                            TerritoryAlert(p.get(i), c4);
                         }  else {
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
@@ -275,7 +275,7 @@ private ImageView background;
                     }else if (result.get() == buttonTypeCancel){
                         System.exit(0);
                     }
-                    p.get(i).addTerritory(startT);
+                    p.get(i).addTerritory(determineTerritory(startingTerritory));
                      
                     
                 }
@@ -302,7 +302,6 @@ private ImageView background;
         if (result.get() == buttonTypeOne){
             if(startContinent == "red"){
                 startingTerritory = button1;
-                
             }else if(startContinent == "pink"){
                 startingTerritory = button5;
             }else if(startContinent == "blue"){
