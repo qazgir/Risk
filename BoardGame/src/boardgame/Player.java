@@ -57,9 +57,11 @@ public class Player {
     public void refreshNumUnits() {
         int out = 3;
         for (Continent c : Game.getContinents()) {
-            if (c.getController().equals(this)) {
-                out += c.getControllerUnits();
+            if(c.getController() != null){
+                if (c.getController().equals(this)) {
+                    out += c.getControllerUnits();
             }
+          }      
         }
         units = out;
     }
