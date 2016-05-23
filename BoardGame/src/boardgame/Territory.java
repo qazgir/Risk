@@ -33,7 +33,6 @@ public class Territory {
     
     public void setController(Player n){
         controller = n;
-        //b.setOnMouseClicked(Put in method 'this.handleClick()');
     }
     public int getUnits(){
         return units;
