@@ -21,6 +21,7 @@ public class Game {
     private static Territory lastClickedTerritory;
     private static String name;
     private static Territory[] territories;
+    private static boolean advancePhase = false;
     
     public static void setPlayers(ArrayList<Player> p) {
         players = p;
@@ -83,5 +84,15 @@ public class Game {
     }
     public static void setLastClickedTerritory(Territory t) {
         lastClickedTerritory = t;
+    }
+    
+    public static void resetAdvancePhase() {
+        advancePhase = false;
+    }
+    public static boolean getAdvancePhase() {
+        return advancePhase;
+    }
+    public static void activateAdvancePhase() {
+        advancePhase = true;
     }
 }

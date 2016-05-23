@@ -99,6 +99,11 @@ private void handleButtonAction(ActionEvent event) {
         Game.setLastClickedTerritory(determineTerritory((Button) event.getSource())); 
     
 }
+
+@FXML
+private void handleAdvancePhase() {
+    Game.activateAdvancePhase();
+}
 private Territory t;
 
 private String startContinent;
@@ -390,5 +395,4 @@ private ImageView background;
        }
        return null;
    }
-
 }

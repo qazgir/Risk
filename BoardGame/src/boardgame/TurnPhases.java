@@ -17,8 +17,6 @@ import javafx.stage.Stage;
  */
 public class TurnPhases {
     
-    private Stage stage3;
-    
     public TurnPhases() {
     }
     
@@ -44,12 +42,12 @@ public class TurnPhases {
         while (true) {
             Territory from = new Territory(0, "", null);
             Game.resetLastClickedTerritory();
-            //Game.resetAdvancePhase();
+            Game.resetAdvancePhase();
             while (!(from.getController().equals(p) && from.getUnits()>=2)) {
                 from = Game.getLastClickedTerritory();
-               /* if (Game.getAdvancePhase()) {
+                if (Game.getAdvancePhase()) {
                     return;
-                }*/
+                }
             }
             Territory to = new Territory(0, "", null);
             Game.resetLastClickedTerritory();
@@ -68,19 +66,17 @@ public class TurnPhases {
                 }
                 Game.resetLastClickedTerritory();
                 while (!Game.getLastClickedTerritory().equals(to)) {
-                   /* if (Game.getAdvancePhase()) {
+                    if (Game.getAdvancePhase()) {
                         break;
                     }
                 }
-            }*/
+            }
             if (to.getUnits() <= 0) {
                 to.getController().surrenderTerritory(to, p);
                 moveSingle(from, to);
             }
         }
     
-            }
-        }
     }
     
     public static void move(Player p) {
