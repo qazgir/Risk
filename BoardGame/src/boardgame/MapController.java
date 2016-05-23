@@ -176,16 +176,17 @@ private ImageView background;
         Game.setContinents(gameContinents);
         Game.setTerritories(gameTerritories);
         initialClaim();
-        while(victory == false){
+        /*while(victory == false){
             ArrayList<Player> t = Game.getPlayers();
             for(int i = 0; i < t.size(); i++){
                 temp = t.get(i);
-                //Game.setTurnTaker(temp);
-                //TurnPhases.takeTurn(temp);
-                //victoryCheck(temp);
+                Game.setTurnTaker(temp);
+                TurnPhases.takeTurn(temp);
+                victoryCheck(temp);
             }
         }
-        }
+        */
+}
 
     
     public void initialClaim(){
