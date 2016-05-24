@@ -30,10 +30,8 @@ public class Player {
     }
  
     public boolean isControlling(Territory t){
-        for (Territory territorie : territories) {
-            if (territorie.equals(t)) {
-                return true;
-            }
+        if(t.getController().equals(this)){
+            return true;
         }
         return false;
     }
@@ -41,6 +39,7 @@ public class Player {
     public void addTerritory(Territory t) {
         if (!isControlling(t)) {
             territories.add(t);
+            t.setController(this);
         }
     }
     public void surrenderTerritory(Territory t, Player p) {
@@ -58,10 +57,10 @@ public class Player {
         return pName;
     }
     
-    public int getUnitsPerTurn(Player p){
+    public int getUnitsPerTurn(){
         int sumUnits = 3;
         for(Continent c: Game.getContinents()){
-            if(c.getController() == p){
+            if(c.getController().equals(this)){
                sumUnits = sumUnits + c.getControllerUnits(); 
             }
         }
