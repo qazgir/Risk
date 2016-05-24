@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.TreeSet;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
@@ -103,11 +104,11 @@ public class TurnPhases {
     
     }*/
     
-   /* public static void attack(Player p){
+    public static void attack(Player p){
         Game.setCurrentPhase("attack");
         Alert confirmAttack = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAttack.setTitle("Time to attack");
-            confirmAttack.setContentText("Would you like to attack?");
+            confirmAttack.setTitle("Time to initiate combataru");
+            confirmAttack.setContentText("Would you like to initiate combataru?");
             ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
             ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
             confirmAttack.getButtonTypes().setAll(yesButton, noButton);
@@ -150,23 +151,77 @@ public class TurnPhases {
                             if(t.isAdjacent(enemeyTerritoriesActual.get(i)) == true){
                                 Territory attacked = enemeyTerritoriesActual.get(i);
                                 Territory attacker = t;
+                                Player attackingPlayer = p;
+                                Player defendingPlayer = attacked.getController();
+                                List<Integer> numdiceAtk = new ArrayList<>();
+                                for(int dice = 1; dice <= t.getUnits(); i++){
+                                    numdiceAtk.add(i);
+                                }
+                                List<Integer> numdiceDef = new ArrayList<>();
+                                for(int dice = 1; dice <= 2; i++){
+                                    numdiceDef.add(i);
+                                }
                                 while(attacked.getUnits() > 0 && attacker.getUnits() >= 1){
-                                    ChoiceDialog<Integer> rollDice = new ChoiceDialog<>(troops.get(0), troops);
-                                    rollDice.setTitle("Roll the dice.");
-                                    rollDice.setHeaderText("Roll " + rollDice);
-                                    rollDice.setContentText("Choose a number of troops to reinforce " + t.getName());
-                                    Optional<Integer> numDice = rollDice.showAndWait();
-                                    if(result.isPresent()){
-                                        t.addUnits(result.get());
-                                    }
+                                    ChoiceDialog<Integer> rollDiceAtk = new ChoiceDialog<>(numdiceAtk.get(0), numdiceAtk);
+                                    rollDiceAtk.setTitle(attacker.getController().getpName() +": Roll the dice.");
+                                    rollDiceAtk.setHeaderText("You can roll up to " + rollDiceAtk);
+                                    rollDiceAtk.setContentText("Choose a number of dice to roll " + numdiceAtk);
+                                    Optional<Integer> numDiceAtk = rollDiceAtk.showAndWait();
+                                    if(numDiceAtk.isPresent()){
+                                        if(attacked.getUnits() > 1){
+                                          ChoiceDialog<Integer> rollDiceDef = new ChoiceDialog<>(numdiceDef.get(0), numdiceDef);
+                                          rollDiceDef.setTitle(attacked.getController().getpName() + ": Roll the dice.");
+                                          rollDiceDef.setHeaderText("You can roll up to 2 dice");
+                                          rollDiceDef.setContentText("Choose a number of dice to roll " + numdiceDef);
+                                          Optional<Integer> numDiceDef = rollDiceDef.showAndWait();
+                                          if(numDiceDef.isPresent()){
+                                              List<Integer> atkRolled = rollNumDice(numDiceAtk.get());
+                                              List<Integer> defRolled = rollNumDice(numDiceDef.get());
+                                              for(int I = 0; I < defRolled.size(); I++){
+                                                  if(defRolled.get(I) >= atkRolled.get(I)){
+                                                       attacker.removeUnits(1);
+                                                    } else {
+                                                       attacked.removeUnits(1);
+                                                  }
+                                                }
+                                            }
+                                        } else { 
+                                            Alert oneDice = new Alert(AlertType.INFORMATION);
+                                            oneDice.setTitle(":( only one dice");
+                                            oneDice.setHeaderText(null);
+                                            oneDice.setContentText("You only get to roll one dice");
+                                            oneDice.showAndWait();
+                                            List<Integer> atkRolled = rollNumDice(numDiceAtk.get());
+                                            Integer defRolled = diceRoll();
+                                            if(defRolled >= atkRolled.get(0)){
+                                                attacker.removeUnits(1);
+                                                Alert unitLost = new Alert(AlertType.INFORMATION);
+                                                unitLost.setTitle("A guy died");
+                                                unitLost.setHeaderText(null);
+                                                unitLost.setContentText("You lost an attacker");
+                                                oneDice.showAndWait();
+                                            } else {
+                                                attacked.removeUnits(1); 
+                                                Alert unitLost = new Alert(AlertType.INFORMATION);
+                                                unitLost.setTitle("A guy died");
+                                                unitLost.setHeaderText(null);
+                                                unitLost.setContentText("You lost an attacker");
+                                                oneDice.showAndWait();
+                                            }
+                                        }
+                                    } 
+                                }
+                                if(attacker.getUnits() == 0){
+                                    p.surrenderTerritory(attacker, attacked.getController());
+                                } else {
+                                    attacked.getController().surrenderTerritory(attacked, p);
                                 }
                             }
                         }
-                    }
-                    
+                    } 
                 }
             }
-    }*/
+    }   
     
     public static void move(Player p) {
         Game.setCurrentPhase("move");

@@ -103,6 +103,11 @@ public class Territory {
         refreshUnits();
     }
     
+    public void removeUnits(int unitsRemoved){
+        units = units - unitsRemoved;
+        refreshUnits();
+    }
+    
     public void refreshUnits(){
         linkedButton.setText(this.territoryName +":"+units);
     }
