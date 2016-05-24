@@ -45,18 +45,20 @@ public class TurnPhases {
         Game.setCurrentPhase("Reinforce");
         int remainingTroops = p.getUnitsPerTurn();
         List<Integer> troops = new ArrayList<>();
-        for(int i = 0; i < remainingTroops; i++){
+        for(int i = 0; i < remainingTroops + 1; i++){
             troops.add(i);
         }
         for(Territory t: p.getTerritories()){
-            ChoiceDialog<Integer> reinforce = new ChoiceDialog<>(troops.get(0), troops);
-            reinforce.setTitle("Reinforce your territories.");
-            reinforce.setHeaderText("Number of troops remining:" + remainingTroops);
-            reinforce.setContentText("Choose a number of troops to reinforce " + t.getName());
-            Optional<Integer> result = reinforce.showAndWait();
-            if(result.isPresent()){
-                t.addUnits(result.get());
-                remainingTroops = remainingTroops - result.get();
+            while(remainingTroops > 0){
+                ChoiceDialog<Integer> reinforce = new ChoiceDialog<>(troops.get(0), troops);
+                reinforce.setTitle("Reinforce your territories.");
+                reinforce.setHeaderText("Number of troops remining:" + remainingTroops);
+                reinforce.setContentText("Choose a number of troops to reinforce " + t.getName());
+                Optional<Integer> result = reinforce.showAndWait();
+                if(result.isPresent()){
+                    t.addUnits(result.get());
+                    remainingTroops = remainingTroops - result.get();
+                }
             }
         }
         
@@ -75,7 +77,7 @@ public class TurnPhases {
                 
             } else {
                 List<String> myTerritories = new ArrayList<>();
-                for(int i = 0; i <= p.getTerritories().size(); i++){
+                for(int i = 0; i < p.getTerritories().size(); i++){
                     myTerritories.add(p.getTerritories().get(i).getName());
                 }
                 List<String> enemeyTerritories = new ArrayList<>();
@@ -86,7 +88,7 @@ public class TurnPhases {
                         }
                     }
                 }
-                for(int i = 0; i <= enemeyTerritories.size(); i++){
+                for(int i = 0; i < enemeyTerritories.size(); i++){
                     Alert attackTarget = new Alert(Alert.AlertType.CONFIRMATION);
                     attackTarget.setTitle("Time to attack");
                     attackTarget.setContentText("Would you like to attack " + enemeyTerritories.get(i));

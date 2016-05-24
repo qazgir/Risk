@@ -221,7 +221,6 @@ private ImageView background;
 
     
     public void initialClaim(){
-        
         if(MainMenuController.twoPlayer == true){
             ArrayList<Territory> p1T = new ArrayList<>();
             Player p1 = new Player("Player 1", p1T);

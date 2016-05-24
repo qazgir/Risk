@@ -17,11 +17,13 @@ public class Player {
     private int units;
     private String pName;
     private ArrayList<Territory> territories;
+    private Player me;
    
     public Player(String name, ArrayList<Territory> myTerritory){
         units = 3;
         pName = name;
         territories = myTerritory;
+        me = this;
         
     }
     
@@ -30,8 +32,10 @@ public class Player {
     }
  
     public boolean isControlling(Territory t){
-        if(t.getController().equals(this)){
-            return true;
+        if(t.getController() != null){
+                if(t.getController().equals(me)){
+                    return true;
+                }
         }
         return false;
     }
@@ -39,7 +43,7 @@ public class Player {
     public void addTerritory(Territory t) {
         if (!isControlling(t)) {
             territories.add(t);
-            t.setController(this);
+            t.setController(me);
         }
     }
     public void surrenderTerritory(Territory t, Player p) {
@@ -60,9 +64,11 @@ public class Player {
     public int getUnitsPerTurn(){
         int sumUnits = 3;
         for(Continent c: Game.getContinents()){
-            if(c.getController().equals(this)){
-               sumUnits = sumUnits + c.getControllerUnits(); 
-            }
+            if(c.getController() != null){
+                if(c.getController().equals(me)){
+                   sumUnits = sumUnits + c.getControllerUnits(); 
+                }
+            }    
         }
         return sumUnits;
     }
