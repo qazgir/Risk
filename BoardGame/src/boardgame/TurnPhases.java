@@ -22,79 +22,20 @@ public class TurnPhases {
     
     public static void reinforce(Player p) {
         Game.setCurrentPhase("reinforce");
-        int numArmies = p.getUnitsPerTurn();
-        //g.outText("Place armies on your territories. Left: " + numArmies);
-        Territory t = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        for (int i = 0; i < numArmies; i++) {
-            t = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            while (!(t.getController().equals(p))) {
-                t = Game.getLastClickedTerritory();
-            }
-            t.changeUnits(t.getUnits()+ 1);
-        }
+        Game.setReinforceUnits(p.getUnitsPerTurn());
     }
     
     public static void attack(Player p) {
         Game.setCurrentPhase("attack");
-        //g.outText("To attack, first select the territory you would like to attack from");
-        while (true) {
-            Territory from = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            Game.resetAdvancePhase();
-            while (!(from.getController().equals(p) && from.getUnits()>=2)) {
-                from = Game.getLastClickedTerritory();
-                if (Game.getAdvancePhase()) {
-                    return;
-                }
-            }
-            Territory to = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            while (to.getController().equals(p) || !(from.isAdjacent(to))) {
-                to = Game.getLastClickedTerritory();
-            }
-            while (to.getUnits() > 0 && from.getUnits() > 1) {
-                ArrayList<Integer> attackingDice = rollNumDice(Math.min(from.getUnits() - 1, 3));
-                ArrayList<Integer> defendingDice = rollNumDice(Math.min(to.getUnits() - 1, 2));
-                for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
-                    if (attackingDice.get(i) > defendingDice.get(i)) {
-                        to.changeUnits(to.getUnits()-1);
-                    } else {
-                        from.changeUnits(from.getUnits()-1);
-                    }
-                }
-                Game.resetLastClickedTerritory();
-                while (!Game.getLastClickedTerritory().equals(to)) {
-                    if (Game.getAdvancePhase()) {
-                        break;
-                    }
-                }
-            }
-            if (to.getUnits() <= 0) {
-                to.getController().surrenderTerritory(to, p);
-                moveSingle(from, to);
-            }
-        }
-    
+        Game.setFromTerritory(null);
     }
     
     public static void move(Player p) {
         Game.setCurrentPhase("move");
-        Territory from = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        while (!from.getController().equals(p) || from.getUnits() < 2) {
-            from = Game.getLastClickedTerritory();
-        }
-        Territory to = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        while (!from.isAdjacent(to) || !to.getController().equals(p)) {
-            to = Game.getLastClickedTerritory();
-        }
-        moveSingle(from, to);
+        Game.setFromTerritory(null);
     }
     
-    private static void moveSingle(Territory from, Territory to) {
+    public static void moveSingle(Territory from, Territory to) {
         ArrayList<Integer> choices = new ArrayList<Integer>();
         for (int i = 0; i < from.getUnits(); i++) {
             choices.add(i);
@@ -113,10 +54,8 @@ public class TurnPhases {
     }
     
     public static void takeTurn(Player p) {
+        Game.setPlayingPlayer(p);
         reinforce(p);
-        attack(p);
-        move(p);
-        Game.setCurrentTurn((Game.getCurrentTurn()+1) % Game.getNumPlayers());
     }
     
     public static int diceRoll() {

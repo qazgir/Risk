@@ -102,7 +102,7 @@ private void handleButtonAction(ActionEvent event) {
 
 @FXML
 private void handleAdvancePhase() {
-    Game.activateAdvancePhase();
+    Game.advancePhase();
 }
 private Territory t;
 

@@ -74,7 +74,56 @@ public class Territory {
     }
     
     public void handleClick() {
-        Game.setLastClickedTerritory(this);
+        if (Game.getCurrentPhase().equals("reinforce")) {
+            //in reinforce phase
+            if (Game.getPlayingPlayer().equals(this.controller)) {
+                //territory is valid
+                units++;
+                Game.setReinforceUnits(Game.getReinforceUnits()-1);
+                if (Game.getReinforceUnits() == 0) {
+                    //out of reinforce units
+                    TurnPhases.attack(this.controller);
+                }
+            }
+        } else if (Game.getCurrentPhase().equals("attack")) {
+            //in attack phase
+            if (Game.getFromTerritory() == null) {
+                if (Game.getPlayingPlayer().equals(this.controller) && this.units >= 2) {
+                    Game.setFromTerritory(this);
+                }
+            } else {
+                if (!(Game.getPlayingPlayer().equals(this.controller)) && Game.getFromTerritory().isAdjacent(this)) {
+                    Territory from = Game.getFromTerritory();
+                    ArrayList<Integer> attackingDice = TurnPhases.rollNumDice(Math.min(from.getUnits() - 1, 3));
+                    ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.min(this.getUnits() - 1, 2));
+                    for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
+                        if (attackingDice.get(i) > defendingDice.get(i)) {
+                            this.changeUnits(this.getUnits()-1);
+                        } else {
+                            from.changeUnits(from.getUnits()-1);
+                        }
+                    }
+                    Game.setFromTerritory(null);
+                    if (this.getUnits() <= 0) {
+                        this.getController().surrenderTerritory(this, Game.getPlayingPlayer());
+                        TurnPhases.moveSingle(from, this);
+                    }
+                } else if (this.equals(Game.getFromTerritory())) {
+                    Game.setFromTerritory(null);
+                }
+            }
+        } else {
+            //in move phase
+            if (Game.getFromTerritory() == null) {
+                if (Game.getPlayingPlayer().equals(this.controller)) {
+                    Game.setFromTerritory(this);
+                }
+            } else {
+                if (Game.getPlayingPlayer().equals(this.controller) && Game.getFromTerritory().isAdjacent(this)) {
+                    TurnPhases.moveSingle(Game.getFromTerritory(), this);
+                }
+            }
+        }
     }
     public void addSideAdjacent(Territory t, Territory m, Territory d, Territory e, Territory f){
         adjacent.add(t);
