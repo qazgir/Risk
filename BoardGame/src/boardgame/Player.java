@@ -54,24 +54,17 @@ public class Player {
         units = u;
     }
     
-    public void refreshNumUnits() {
-        int out = 3;
-        for (Continent c : Game.getContinents()) {
-            if(c.getController() != null){
-                if (c.getController().equals(this)) {
-                    out += c.getControllerUnits();
-            }
-          }      
-        }
-        units = out;
-    }
-    
-    public int getUnitsPerTurn() {
-        refreshNumUnits();
-        return units;
-    }
-    
     public String getpName(){
         return pName;
+    }
+    
+    public int getUnitsPerTurn(Player p){
+        int sumUnits = 3;
+        for(Continent c: Game.getContinents()){
+            if(c.getController() == p){
+               sumUnits = sumUnits + c.getControllerUnits(); 
+            }
+        }
+        return sumUnits;
     }
 }

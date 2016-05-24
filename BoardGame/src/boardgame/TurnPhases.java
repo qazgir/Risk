@@ -6,8 +6,12 @@
 package boardgame;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.TreeSet;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Stage;
 
@@ -36,22 +40,27 @@ public class TurnPhases {
         }
     }*/
     
-    public static void reinforce(Player p) {
-        Game.setCurrentPhase("reinforce");
-        int numArmies = p.getUnitsPerTurn();
-        while(numArmies > 0){
-            if(Game.getLastClickedTerritory() == null){
-                Territory t = Game.getLastClickedTerritory();
-                if(t.getController().equals(p)){
-                    t.changeUnits(t.getUnits()+ 1);
-                    numArmies = numArmies - 1;
-                }
-            }    
+    public static void reinforce(Player p){
+        Game.setCurrentPhase("Reinforce");
+        int remainingTroops = p.getUnitsPerTurn(p);
+        List<Integer> troops = new ArrayList<>();
+        for(int i = 0; i < remainingTroops; i++){
+            troops.add(i);
         }
+        for(Territory t: p.getTerritories()){
+            ChoiceDialog<Integer> reinforce = new ChoiceDialog<>(troops.get(0), troops);
+            reinforce.setTitle("Reinforce your territories.");
+            reinforce.setHeaderText("Number of troops remining:" + remainingTroops);
+            reinforce.setContentText("Choose a number of troops to reinforce " + t.getName());
+            Optional<Integer> result = reinforce.showAndWait();
+            if(result.isPresent()){
+                t.addUnits(result.get());
+            }
+        }
+        
     }
-    
-
-    public static void attack(Player p) {
+ 
+    /*public static void attack(Player p) {
         Game.setCurrentPhase("attack");
         //g.outText("To attack, first select the territory you would like to attack from");
         while (true) {
@@ -92,7 +101,72 @@ public class TurnPhases {
             }
         }
     
-    }
+    }*/
+    
+   /* public static void attack(Player p){
+        Game.setCurrentPhase("attack");
+        Alert confirmAttack = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAttack.setTitle("Time to attack");
+            confirmAttack.setContentText("Would you like to attack?");
+            ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+            confirmAttack.getButtonTypes().setAll(yesButton, noButton);
+            Optional<ButtonType> attackResult = confirmAttack.showAndWait();
+            if(attackResult.get() == noButton){
+                
+            } else {
+                List<String> myTerritories = new ArrayList<>();
+                for(int i = 0; i <= p.getTerritories().size(); i++){
+                    myTerritories.add(p.getTerritories().get(i).getName());
+                }
+                List<String> enemeyTerritories = new ArrayList<>();
+                for(Continent c: Game.getContinents()){
+                    for(Territory t: c.getTerritory()){
+                        if(!(t.getController().equals(p))){
+                            enemeyTerritories.add(t.getName());
+                        }
+                    }
+                }
+                for(int i = 0; i <= enemeyTerritories.size(); i++){
+                    Alert attackTarget = new Alert(Alert.AlertType.CONFIRMATION);
+                    attackTarget.setTitle("Time to attack");
+                    attackTarget.setContentText("Would you like to attack " + enemeyTerritories.get(i));
+                    ButtonType yesTarget = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                    ButtonType noTarget = new ButtonType("No", ButtonBar.ButtonData.NO);
+                    attackTarget.getButtonTypes().setAll(yesTarget, noTarget);
+                    Optional<ButtonType> targetResult = attackTarget.showAndWait();
+                    if(targetResult.get() == noTarget){
+                    
+                    } else {
+                        List<Territory> enemeyTerritoriesActual = new ArrayList<>();
+                        for(Continent c: Game.getContinents()){
+                            for(Territory t: c.getTerritory()){
+                                if(!(t.getController().equals(p))){
+                                    enemeyTerritoriesActual.add(t);
+                                }
+                            }
+                        }
+                        for(Territory t: p.getTerritories()){
+                            if(t.isAdjacent(enemeyTerritoriesActual.get(i)) == true){
+                                Territory attacked = enemeyTerritoriesActual.get(i);
+                                Territory attacker = t;
+                                while(attacked.getUnits() > 0 && attacker.getUnits() >= 1){
+                                    ChoiceDialog<Integer> rollDice = new ChoiceDialog<>(troops.get(0), troops);
+                                    rollDice.setTitle("Roll the dice.");
+                                    rollDice.setHeaderText("Roll " + rollDice);
+                                    rollDice.setContentText("Choose a number of troops to reinforce " + t.getName());
+                                    Optional<Integer> numDice = rollDice.showAndWait();
+                                    if(result.isPresent()){
+                                        t.addUnits(result.get());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+    }*/
     
     public static void move(Player p) {
         Game.setCurrentPhase("move");
@@ -129,9 +203,9 @@ public class TurnPhases {
     
     public static void takeTurn(Player p) {
         reinforce(p);
-        attack(p);
-        move(p);
-        Game.setCurrentTurn((Game.getCurrentTurn()+1) % Game.getNumPlayers());
+        //attack(p);
+       // move(p);
+        //Game.setCurrentTurn((Game.getCurrentTurn()+1) % Game.getNumPlayers());
     }
     
     public static int diceRoll() {

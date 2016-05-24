@@ -189,8 +189,8 @@ private ImageView background;
                             ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
                             confirm.getButtonTypes().setAll(okButton);
                             confirm.showAndWait();
-                //TurnPhases.takeTurn(temp);
-                victoryCheck(temp);
+                TurnPhases.takeTurn(temp);
+                //victoryCheck(temp);
             }
         }
 }

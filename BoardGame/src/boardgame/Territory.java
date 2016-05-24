@@ -23,7 +23,7 @@ public class Territory {
         linkedButton = b;
         units = u;
         territoryName = s;
-        linkedButton.setText(this.territoryName +":"+u);
+        linkedButton.setText(this.territoryName +":"+units);
         linkedButton.setOnMouseClicked(event -> this.handleClick());
     }
     
@@ -97,4 +97,14 @@ public class Territory {
     public Button getLinkedButton(){
         return linkedButton;
     }
+    
+    public void addUnits(int unitsAdded){
+        units = units + unitsAdded;
+        refreshUnits();
+    }
+    
+    public void refreshUnits(){
+        linkedButton.setText(this.territoryName +":"+units);
+    }
+    
 }
