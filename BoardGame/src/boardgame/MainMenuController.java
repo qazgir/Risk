@@ -21,6 +21,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -40,11 +41,16 @@ private Button quit;
 private Button play;
 
 @FXML
+private Button help;
+
+@FXML
 private ImageView backgroundImage;
 
 public static boolean twoPlayer = true;
 
 private final Image riskImage = new Image("http://screenrant.com/wp-content/uploads/Risk-board-game-movie-being-scripted-by-Shield-writer.jpg", 580, 450, true, true);     
+
+public static Stage helpStage;
 
 public static Stage stage2;
 
@@ -61,6 +67,19 @@ public void initialize(URL url, ResourceBundle rb) {
 public void quit(){
     System.exit(0);
 }
+@FXML
+public void handleHelp(MouseEvent mouse) throws IOException{
+    MainMenuController.helpStage = BoardGame.stage;
+    fxmlLoader = new FXMLLoader(getClass().getResource("HelpWindow.fxml"));
+    Parent root2 = fxmlLoader.load();
+    Scene scene = new Scene(root2);
+    scene.getStylesheets().add(getClass().getResource("helpwindow.css").toExternalForm());
+    helpStage.setScene(scene);
+    HelpWindowController helpCreator = fxmlLoader.getController();
+    helpStage.setResizable(true);
+    helpStage.show();
+}
+
 
 public void startGame() throws IOException{
     Alert alert = new Alert(AlertType.CONFIRMATION);
