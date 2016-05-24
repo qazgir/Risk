@@ -117,14 +117,16 @@ public class TurnPhases {
                 
             } else {
                 List<String> myTerritories = new ArrayList<>();
-                for(int i = 0; i <= p.getTerritories().size(); i++){
+                for(int i = 0; i < p.getTerritories().size(); i++){
                     myTerritories.add(p.getTerritories().get(i).getName());
                 }
                 List<String> enemeyTerritories = new ArrayList<>();
                 for(Continent c: Game.getContinents()){
                     for(Territory t: c.getTerritory()){
-                        if(!(t.getController().equals(p))){
-                            enemeyTerritories.add(t.getName());
+                        if(t.getController() != null){
+                            if(!(t.getController().equals(p))){
+                                enemeyTerritories.add(t.getName());
+                            }
                         }
                     }
                 }
@@ -142,9 +144,11 @@ public class TurnPhases {
                         List<Territory> enemeyTerritoriesActual = new ArrayList<>();
                         for(Continent c: Game.getContinents()){
                             for(Territory t: c.getTerritory()){
-                                if(!(t.getController().equals(p))){
-                                    enemeyTerritoriesActual.add(t);
-                                }
+                                if(t.getController() != null){    
+                                    if(!(t.getController().equals(p))){
+                                        enemeyTerritoriesActual.add(t);
+                                    }
+                                }    
                             }
                         }
                         for(Territory t: p.getTerritories()){
@@ -154,11 +158,11 @@ public class TurnPhases {
                                 Player attackingPlayer = p;
                                 Player defendingPlayer = attacked.getController();
                                 List<Integer> numdiceAtk = new ArrayList<>();
-                                for(int dice = 1; dice <= t.getUnits(); i++){
+                                for(int dice = 1; dice < t.getUnits() + 1; dice++){
                                     numdiceAtk.add(i);
                                 }
                                 List<Integer> numdiceDef = new ArrayList<>();
-                                for(int dice = 1; dice <= 2; i++){
+                                for(int dice = 1; dice <= 2; dice++){
                                     numdiceDef.add(i);
                                 }
                                 while(attacked.getUnits() > 0 && attacker.getUnits() >= 1){
@@ -206,7 +210,7 @@ public class TurnPhases {
                                                 unitLost.setTitle("A guy died");
                                                 unitLost.setHeaderText(null);
                                                 unitLost.setContentText("You lost an attacker");
-                                                oneDice.showAndWait();
+                                                unitLost.showAndWait();
                                             }
                                         }
                                     } 
@@ -221,6 +225,11 @@ public class TurnPhases {
                     } 
                 }
             }
+            Alert combatOver = new Alert(AlertType.INFORMATION);
+            combatOver.setTitle("A guy died");
+            combatOver.setHeaderText(null);
+            combatOver.setContentText("You lost an attacker");
+            combatOver.showAndWait();
     }   
     
     public static void move(Player p) {
@@ -258,7 +267,7 @@ public class TurnPhases {
     
     public static void takeTurn(Player p) {
         reinforce(p);
-        //attack(p);
+        attack(p);
        // move(p);
         //Game.setCurrentTurn((Game.getCurrentTurn()+1) % Game.getNumPlayers());
     }

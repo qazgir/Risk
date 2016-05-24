@@ -41,6 +41,7 @@ public class Player {
     public void addTerritory(Territory t) {
         if (!isControlling(t)) {
             territories.add(t);
+            t.setController(this);
         }
     }
     public void surrenderTerritory(Territory t, Player p) {

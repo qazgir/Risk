@@ -184,11 +184,11 @@ private ImageView background;
             for(int i = 0; i < t.size(); i++){
                 temp = t.get(i);
                 Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Next Turn");
-                            confirm.setContentText("It is now " + temp.getpName() + "'s turn!");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
+                confirm.setTitle("Next Turn");
+                confirm.setContentText("It is now " + temp.getpName() + "'s turn!");
+                ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                confirm.getButtonTypes().setAll(okButton);
+                confirm.showAndWait();
                 TurnPhases.takeTurn(temp);
                 //victoryCheck(temp);
             }
