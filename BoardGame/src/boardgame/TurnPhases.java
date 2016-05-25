@@ -76,22 +76,22 @@ public class TurnPhases {
             if(attackResult.get() == noButton){
                 
             } else {
-                List<String> myTerritories = new ArrayList<>();
+                List<Territory> myTerritories = new ArrayList<>();
                 for(int i = 0; i < p.getTerritories().size(); i++){
-                    myTerritories.add(p.getTerritories().get(i).getName());
+                    myTerritories.add(p.getTerritories().get(i));
                 }
-                List<String> enemeyTerritories = new ArrayList<>();
+                List<Territory> enemeyTerritories = new ArrayList<>();
                 for(Continent c: Game.getContinents()){
                     for(Territory t: c.getTerritory()){
                         if(!(t.getController().equals(p))){
-                            enemeyTerritories.add(t.getName());
+                            enemeyTerritories.add(t);
                         }
                     }
                 }
                 for(int i = 0; i < enemeyTerritories.size(); i++){
                     Alert attackTarget = new Alert(Alert.AlertType.CONFIRMATION);
                     attackTarget.setTitle("Time to attack");
-                    attackTarget.setContentText("Would you like to attack " + enemeyTerritories.get(i));
+                    attackTarget.setContentText("Would you like to attack " + enemeyTerritories.get(i).getName());
                     ButtonType yesTarget = new ButtonType("Yes", ButtonBar.ButtonData.YES);
                     ButtonType noTarget = new ButtonType("No", ButtonBar.ButtonData.NO);
                     attackTarget.getButtonTypes().setAll(yesTarget, noTarget);
@@ -99,27 +99,19 @@ public class TurnPhases {
                     if(targetResult.get() == noTarget){
                     
                     } else {
-                        List<Territory> enemeyTerritoriesActual = new ArrayList<>();
-                        for(Continent c: Game.getContinents()){
-                            for(Territory t: c.getTerritory()){
-                                if(!(t.getController().equals(p))){
-                                    enemeyTerritoriesActual.add(t);
-                                }
-                            }
-                        }
                         for(Territory t: p.getTerritories()){
-                            if(t.isAdjacent(enemeyTerritoriesActual.get(i)) == true){
-                                Territory attacked = enemeyTerritoriesActual.get(i);
+                            if(t.isAdjacent(enemeyTerritories.get(i)) == true){
+                                Territory attacked = enemeyTerritories.get(i);
                                 Territory attacker = t;
                                 Player attackingPlayer = p;
                                 Player defendingPlayer = attacked.getController();
                                 List<Integer> numdiceAtk = new ArrayList<>();
-                                for(int dice = 1; dice <= t.getUnits(); i++){
-                                    numdiceAtk.add(i);
+                                for(int dice = 1; dice <= t.getUnits(); dice++){
+                                    numdiceAtk.add(dice);
                                 }
                                 List<Integer> numdiceDef = new ArrayList<>();
-                                for(int dice = 1; dice <= 2; i++){
-                                    numdiceDef.add(i);
+                                for(int dice = 1; dice <= 2; dice++){
+                                    numdiceDef.add(dice);
                                 }
                                 while(attacked.getUnits() > 0 && attacker.getUnits() >= 1){
                                     ChoiceDialog<Integer> rollDiceAtk = new ChoiceDialog<>(numdiceAtk.get(0), numdiceAtk);
@@ -140,8 +132,10 @@ public class TurnPhases {
                                               for(int I = 0; I < defRolled.size(); I++){
                                                   if(defRolled.get(I) >= atkRolled.get(I)){
                                                        attacker.removeUnits(1);
+                                                       numdiceAtk.remove(numdiceAtk.size() - 1);
                                                     } else {
                                                        attacked.removeUnits(1);
+                                                       numdiceDef.remove(numdiceDef.size() - 1);
                                                   }
                                                 }
                                             }
