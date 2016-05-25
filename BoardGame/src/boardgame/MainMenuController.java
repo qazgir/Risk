@@ -76,7 +76,7 @@ public void handleHelp(MouseEvent mouse) throws IOException{
     scene.getStylesheets().add(getClass().getResource("helpwindow.css").toExternalForm());
     helpStage.setScene(scene);
     HelpWindowController helpCreator = fxmlLoader.getController();
-    helpStage.setResizable(true);
+    helpStage.setResizable(false);
     helpStage.show();
 }
 

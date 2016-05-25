@@ -5,10 +5,16 @@
  */
 package boardgame;
 
+import static boardgame.MainMenuController.fxmlLoader;
+import static boardgame.MainMenuController.helpStage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -27,8 +33,16 @@ public class HelpWindowController implements Initializable {
      * Initializes the controller class.
      */
 @FXML
-public void handleBack(MouseEvent m1){
-    
+public void handleBack(MouseEvent m1) throws IOException{
+    HelpWindowController.stage = BoardGame.stage;
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+    Parent root = fxmlLoader.load();
+    Scene scene = new Scene(root);
+    scene.getStylesheets().add(getClass().getResource("mainmenu.css").toExternalForm());
+    helpStage.setScene(scene);
+    MainMenuController bigBoy = fxmlLoader.getController();
+    helpStage.setResizable(false);
+    helpStage.show();
 }
     @Override
 public void initialize(URL url, ResourceBundle rb) {
