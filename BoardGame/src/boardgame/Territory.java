@@ -112,7 +112,7 @@ public class Territory {
                     Game.setFromTerritory(null);
                 }
             }
-        } else {
+        } else if (Game.getCurrentPhase().equals("move")) {
             //in move phase
             if (Game.getFromTerritory() == null) {
                 if (Game.getPlayingPlayer().equals(this.controller)) {

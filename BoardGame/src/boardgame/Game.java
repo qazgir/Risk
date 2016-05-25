@@ -100,11 +100,25 @@ public class Game {
         lastClickedTerritory = t;
     }
     
+    public static void victoryCheck(Player p){
+        boolean victory = true;
+        for(Continent c: Game.getContinents()){
+            if(c.getController() != p){
+                victory = false;
+            }
+        }
+        if(victory = true){
+            //playingPlayer has one the game
+            //MapController.openWinScreen(); <- not static
+        }
+    }
+    
     public static void advancePhase() {
         if (currentPhase.equals("attack")) {
+            victoryCheck(playingPlayer);
             TurnPhases.move(playingPlayer);
         } else if (currentPhase.equals("move")) {
-            playingPlayer = players.get((players.indexOf(playingPlayer) + 1) % players.size());
+            TurnPhases.takeTurn(players.get((players.indexOf(playingPlayer) + 1) % players.size()));
         }
     }
 }

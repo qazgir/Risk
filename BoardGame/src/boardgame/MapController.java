@@ -181,20 +181,7 @@ private ImageView background;
         Game.setContinents(gameContinents);
         Game.setTerritories(gameTerritories);
         initialClaim();
-        while(victory == false){
-            ArrayList<Player> t = Game.getPlayers();
-            for(int i = 0; i < t.size(); i++){
-                temp = t.get(i);
-                Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Next Turn");
-                            confirm.setContentText("It is now " + temp.getpName() + "'s turn!");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                TurnPhases.takeTurn(temp);
-                victoryCheck(temp);
-            }
-        }
+        TurnPhases.takeTurn(Game.getPlayers().get(0));
 }
 
     
@@ -203,7 +190,7 @@ private ImageView background;
         boolean pinkpicked = false;
         boolean greenpicked = false;
         boolean bluepicked = false;
-        if(MainMenuController.twoPlayer == true){
+        if(MainMenuController.twoPlayer){
             ArrayList<Territory> p1T = new ArrayList<>();
             Player p1 = new Player("Player 1", p1T);
             ArrayList<Territory> p2T = new ArrayList<>();
@@ -225,7 +212,7 @@ private ImageView background;
                     ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
                     alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
                     Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == buttonTypeOne) {
+                    if (result.get().equals(buttonTypeOne)) {
                         if(redpicked == false){
                             redpicked = true;
                             startContinent = "red";
@@ -239,7 +226,7 @@ private ImageView background;
                             confirm.showAndWait();
                             alert.showAndWait();
                         }
-                    }else if (result.get() == buttonTypeTwo){
+                    }else if (result.get().equals(buttonTypeTwo)){
                          if(pinkpicked == false){
                             pinkpicked = true;
                             startContinent = "pink";
@@ -253,7 +240,7 @@ private ImageView background;
                             confirm.showAndWait();
                             alert.showAndWait();
                         }
-                    } else if (result.get() == buttonTypeThree) {
+                    } else if (result.get().equals(buttonTypeThree)) {
                         if(bluepicked == false){
                             bluepicked = true;
                             startContinent = "blue";
@@ -267,7 +254,7 @@ private ImageView background;
                             confirm.showAndWait();
                             alert.showAndWait();
                         }
-                    } else if (result.get() == buttonTypeFour) {
+                    } else if (result.get().equals(buttonTypeFour)) {
                         if(greenpicked == false){
                             greenpicked = true;
                             startContinent = "green";
@@ -281,11 +268,11 @@ private ImageView background;
                             confirm.showAndWait();
                             alert.showAndWait();
                         }
-                    }else if (result.get() == buttonTypeCancel){
+                    }else if (result.get().equals(buttonTypeCancel)){
                         System.exit(0);
                     }
                     p.get(i).addTerritory(determineTerritory(startingTerritory));
-                     
+                     determineTerritory(startingTerritory).setController(p1);
                     
                 }
                
@@ -309,43 +296,43 @@ private ImageView background;
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button1;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button5;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button9;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button13;
             }
         }else if (result.get() == buttonTypeTwo){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button2;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button6;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button10;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button14;
             }
         }else if (result.get() == buttonTypeThree){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button3;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button7;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button11;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button15;
             }
         }else if (result.get() == buttonTypeFour){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button4;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button8;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button12;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button16;
             }
         }else if (result.get() == buttonTypeCancel){
@@ -360,33 +347,23 @@ private ImageView background;
             }
         }
     }
-    
-    public void victoryCheck(Player p){
-        victory = true;
-        for(Continent c: Game.getContinents()){
-            if(c.getController() != p){
-                victory = false;
-            }
+   
+   public void openWinScreen() {
+       this.stage3 = BoardGame.stage;
+       fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage2.setScene(scene);
+            stage2.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(victory = true){
-            this.stage3 = BoardGame.stage;
-            fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-                Scene scene = new Scene(root);
-                stage2.setScene(scene);
-                stage2.show();
-            } catch (IOException ex) {
-                Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-    }
+   }
     
-   public void victoryCheck(){
-       Player p = new Player("Test", null);
-       victoryCheck(p);
+   public void victoryCheck() {
+       
    }
    
    public Territory determineTerritory(Button b){

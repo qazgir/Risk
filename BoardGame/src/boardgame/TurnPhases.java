@@ -8,6 +8,10 @@ package boardgame;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.TreeSet;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Stage;
 
@@ -55,6 +59,12 @@ public class TurnPhases {
     
     public static void takeTurn(Player p) {
         Game.setPlayingPlayer(p);
+        Alert confirm = new Alert(AlertType.CONFIRMATION);
+        confirm.setTitle("Next Turn");
+        confirm.setContentText("It is now " + p.getpName() + "'s turn!");
+        ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        confirm.getButtonTypes().setAll(okButton);
+        confirm.showAndWait();
         reinforce(p);
     }
     

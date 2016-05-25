@@ -95,7 +95,7 @@ public void startGame() throws IOException{
         System.exit(0);
     }
     
-    if(twoPlayer = true){
+    if(twoPlayer){
         Player p1 = new Player("forseen",null);
         Player p2 = new Player("TaiLopez",null);
     }else{
