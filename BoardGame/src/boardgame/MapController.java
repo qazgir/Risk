@@ -110,6 +110,22 @@ private Button startingTerritory;
 
 private Territory startT;
 
+ boolean t1 = false;
+ boolean t2 = false;
+ boolean t3 = false;
+ boolean t4 = false;
+ boolean t5 = false;
+ boolean t6 = false;
+ boolean t7 = false;
+ boolean t8 = false;       
+boolean t9 = false;
+ boolean t10 = false;
+ boolean t11 = false;
+ boolean t12 = false;
+ boolean t13 = false;
+ boolean t14 = false;
+ boolean t15 = false;
+ boolean t16 = false;
 @FXML
 public Button advancePhase;
 
@@ -211,7 +227,7 @@ private ImageView background;
             p.add(p2);
             Game.setPlayers(p);
             if(Game.getLastClickedTerritory() == null){
-                for(int i = 0; i < Game.getPlayers().size(); i++){
+                for(int i = 0; i < Game.getTerritories().length; i++){
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.setTitle("Start");
                     alert.setHeaderText("Choose the  Starting Continent");
@@ -225,24 +241,25 @@ private ImageView background;
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == buttonTypeOne) {
                         if(redpicked == false){
-                            redpicked = true;
-                            startContinent = "red";
+                          startContinent = "red";
                             TerritoryAlert(p.get(i), c1);
-                        } else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
+                            
+                        } else if(t1 == true && t2 == true && t3 == true && t4 == true) {
+                                Alert confirm = new Alert(AlertType.CONFIRMATION);
+                                confirm.setTitle("Allready occupied territory");
+                                confirm.setContentText("That continent is allready occupied");
+                                ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                confirm.getButtonTypes().setAll(okButton);
+                                confirm.showAndWait();
+                                alert.showAndWait();
+                            }
+                        
                     }else if (result.get() == buttonTypeTwo){
                          if(pinkpicked == false){
-                            pinkpicked = true;
+                            
                             startContinent = "pink";
                             TerritoryAlert(p.get(i), c2);
-                         } else {
+                         } else if(t5 == true && t6 == true && t7 == true && t8 == true) {
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
                             confirm.setContentText("That continent is allready occupied");
@@ -253,10 +270,10 @@ private ImageView background;
                         }
                     } else if (result.get() == buttonTypeThree) {
                         if(bluepicked == false){
-                            bluepicked = true;
+                            
                             startContinent = "blue";
                             TerritoryAlert(p.get(i), c3);
-                        }  else {
+                        }  else if(t9 == true && t10 == true && t11 == true && t12 == true){
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
                             confirm.setContentText("That continent is allready occupied");
@@ -267,10 +284,10 @@ private ImageView background;
                         }
                     } else if (result.get() == buttonTypeFour) {
                         if(greenpicked == false){
-                            greenpicked = true;
+                            
                             startContinent = "green";
                             TerritoryAlert(p.get(i), c4);
-                        }  else {
+                        }  else if(t13 == true && t14 == true && t5 == true && t16 == true) {
                             Alert confirm = new Alert(AlertType.CONFIRMATION);
                             confirm.setTitle("Allready occupied territory");
                             confirm.setContentText("That continent is allready occupied");
@@ -292,6 +309,7 @@ private ImageView background;
         }
             
     }
+
     
     
     public void TerritoryAlert(Player p, Continent c){
@@ -308,43 +326,107 @@ private ImageView background;
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
             if(startContinent == "red"){
-                startingTerritory = button1;
+                if(t1 == false){
+                    t1 = true;
+                    startingTerritory = button1;
+                }
+                
             }else if(startContinent == "pink"){
-                startingTerritory = button5;
+                if(t5 == false){
+                    t5 = true;
+                    startingTerritory = button5;
+                }
+                
             }else if(startContinent == "blue"){
-                startingTerritory = button9;
+                if(t9 == false){
+                    t9 = true;
+                    startingTerritory = button9;
+                }
+                
             }else if(startContinent == "green"){
-                startingTerritory = button13;
+                if(t13 == false){
+                    t13 = true;
+                    startingTerritory = button13;
+                }
+                
             }
         }else if (result.get() == buttonTypeTwo){
             if(startContinent == "red"){
-                startingTerritory = button2;
+                if(t2 == false){
+                    t2 = true;
+                    startingTerritory = button2;
+                }
+                
             }else if(startContinent == "pink"){
-                startingTerritory = button6;
+               if(t6 == false){
+                    t6 = true;
+                    startingTerritory = button6;
+                }
+                
             }else if(startContinent == "blue"){
-                startingTerritory = button10;
+                if(t10 == false){
+                    t10 = true;
+                    startingTerritory = button10;
+                }
+                
             }else if(startContinent == "green"){
-                startingTerritory = button14;
+                if(t14 == false){
+                    t14 = true;
+                    startingTerritory = button14;
+                }
+                
             }
         }else if (result.get() == buttonTypeThree){
             if(startContinent == "red"){
-                startingTerritory = button3;
+                if(t3 == false){
+                    t3 = true;
+                    startingTerritory = button3;
+                }
+                
             }else if(startContinent == "pink"){
-                startingTerritory = button7;
+                if(t7 == false){
+                    t7 = true;
+                    startingTerritory = button7;
+                }
+                
             }else if(startContinent == "blue"){
-                startingTerritory = button11;
+                if(t11 == false){
+                    t11 = true;
+                    startingTerritory = button11;
+                }
+                
             }else if(startContinent == "green"){
-                startingTerritory = button15;
+                if(t15 == false){
+                    t15 = true;
+                    startingTerritory = button15;
+                }
+                
             }
         }else if (result.get() == buttonTypeFour){
             if(startContinent == "red"){
-                startingTerritory = button4;
+                if(t4 == false){
+                    t4 = true;
+                    startingTerritory = button4;
+                }
+                
             }else if(startContinent == "pink"){
-                startingTerritory = button8;
+                if(t8 == false){
+                    t8 = true;
+                    startingTerritory = button8;
+                }
+                
             }else if(startContinent == "blue"){
-                startingTerritory = button12;
+                if(t12 == false){
+                    t12 = true;
+                    startingTerritory = button12;
+                }
+                
             }else if(startContinent == "green"){
-                startingTerritory = button16;
+                if(t16 == false){
+                    t16 = true;
+                    startingTerritory = button16;
+                }
+                
             }
         }else if (result.get() == buttonTypeCancel){
             System.exit(0);
