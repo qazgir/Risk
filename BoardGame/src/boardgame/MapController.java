@@ -29,6 +29,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -203,9 +204,29 @@ private ImageView background;
         boolean bluepicked = false;
         if(MainMenuController.twoPlayer == true){
             ArrayList<Territory> p1T = new ArrayList<>();
-            Player p1 = new Player("Player 1", p1T);
+            String user1 = new String ("");
+            String user2 = new String ("");
+        
+            TextInputDialog dialog1 = new TextInputDialog("");
+            dialog1.setTitle("Text Input Dialog");
+            dialog1.setHeaderText("Username Selection");
+            dialog1.setContentText("Please enter your username:");
+            Optional<String> user1Result = dialog1.showAndWait();
+            if (user1Result.isPresent()){
+                user1 = user1Result.get();
+            }
+            TextInputDialog dialog2 = new TextInputDialog("");
+            dialog2.setTitle("Text Input Dialog");
+            dialog2.setHeaderText("Username Selection");
+            dialog2.setContentText("Please enter your username:");
+            Optional<String> user2Result = dialog2.showAndWait();
+            if (user2Result.isPresent()){
+                user2 = user2Result.get();
+            }
+
+            Player p1 = new Player(user1, p1T);
             ArrayList<Territory> p2T = new ArrayList<>();
-            Player p2 = new Player("Player 2", p2T);
+            Player p2 = new Player(user2, p2T);
             ArrayList<Player> p = new ArrayList<Player>();
             p.add(p1);
             p.add(p2);

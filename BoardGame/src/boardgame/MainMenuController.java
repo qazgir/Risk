@@ -7,6 +7,7 @@ package boardgame;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -114,12 +116,7 @@ public void startGame() throws IOException{
         System.exit(0);
     }
     
-    if(twoPlayer = true){
-        Player p1 = new Player("forseen",null);
-        Player p2 = new Player("TaiLopez",null);
-    }else{
-        System.exit(0);
-    }
+
     MainMenuController.stage2 = BoardGame.stage;
     fxmlLoader = new FXMLLoader(getClass().getResource("Map.fxml"));  
     Parent root = fxmlLoader.load();
