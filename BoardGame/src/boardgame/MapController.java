@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,22 +135,22 @@ private ImageView background;
     }    
     
     public void createMVPTerritories(){
-        Territory t1 = new Territory(0, "JackyMayo", button1);
-        Territory t2 = new Territory(0, "EE-Sama", button2);
-        Territory t3 = new Territory(0, "RTZBabyrage", button3);
-        Territory t4 = new Territory(0, "EnChuanTress", button4);
-        Territory t5 = new Territory(0, "JeraxSpirit", button5);
-        Territory t6 = new Territory(0, "ODPixel", button6);
-        Territory t7 = new Territory(0, "PEDUR", button7);
-        Territory t8 = new Territory(0, "IndianOfflaners", button8);
-        Territory t9 = new Territory(0, "i buy bread", button9);
-        Territory t10 = new Territory(0, "9000MMRPOINTS", button10);
-        Territory t11 = new Territory(0, "HappyLilTree", button11);
-        Territory t12 = new Territory(0, "VirtusThrow", button12);
-        Territory t13 = new Territory(0, "DondoFace", button13);
-        Territory t14 = new Territory(0, "DC>>MemeArrows", button14);
-        Territory t15 = new Territory(0, "Keepo", button15);
-        Territory t16 = new Territory(0, "SinGSonG", button16);
+        Territory t1 = new Territory(3, "JackyMayo", button1);
+        Territory t2 = new Territory(3, "EE-Sama", button2);
+        Territory t3 = new Territory(3, "RTZBabyrage", button3);
+        Territory t4 = new Territory(3, "EnChuanTress", button4);
+        Territory t5 = new Territory(3, "JeraxSpirit", button5);
+        Territory t6 = new Territory(3, "ODPixel", button6);
+        Territory t7 = new Territory(3, "PEDUR", button7);
+        Territory t8 = new Territory(3, "IndianOfflaners", button8);
+        Territory t9 = new Territory(3, "i buy bread", button9);
+        Territory t10 = new Territory(3, "9000MMRPOINTS", button10);
+        Territory t11 = new Territory(3, "HappyLilTree", button11);
+        Territory t12 = new Territory(3, "VirtusThrow", button12);
+        Territory t13 = new Territory(3, "DondoFace", button13);
+        Territory t14 = new Territory(3, "DC>>MemeArrows", button14);
+        Territory t15 = new Territory(3, "Keepo", button15);
+        Territory t16 = new Territory(3, "SinGSonG", button16);
         
         Territory[] TArray1= {t1, t2, t3, t4};
         Territory[] TArray2= {t5, t6, t7, t8};
@@ -186,11 +188,7 @@ private ImageView background;
 
     
     public void initialClaim(){
-        boolean redpicked = false;
-        boolean pinkpicked = false;
-        boolean greenpicked = false;
-        boolean bluepicked = false;
-        if(MainMenuController.twoPlayer){
+        if(MainMenuController.twoPlayer == true){
             ArrayList<Territory> p1T = new ArrayList<>();
             Player p1 = new Player("Player 1", p1T);
             ArrayList<Territory> p2T = new ArrayList<>();
@@ -199,87 +197,24 @@ private ImageView background;
             p.add(p1);
             p.add(p2);
             Game.setPlayers(p);
-            if(Game.getLastClickedTerritory() == null){
-                for(int i = 0; i < Game.getPlayers().size(); i++){
-                    Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setTitle("Start");
-                    alert.setHeaderText("Choose the  Starting Continent");
-                    alert.setContentText("What continent would you like to start in?");
-                    ButtonType buttonTypeOne = new ButtonType("Red");
-                    ButtonType buttonTypeTwo = new ButtonType("Pink");
-                    ButtonType buttonTypeThree = new ButtonType("Blue");
-                    ButtonType buttonTypeFour = new ButtonType("Green");
-                    ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get().equals(buttonTypeOne)) {
-                        if(redpicked == false){
-                            redpicked = true;
-                            startContinent = "red";
-                            TerritoryAlert(p.get(i), c1);
-                        } else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    }else if (result.get().equals(buttonTypeTwo)){
-                         if(pinkpicked == false){
-                            pinkpicked = true;
-                            startContinent = "pink";
-                            TerritoryAlert(p.get(i), c2);
-                         } else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    } else if (result.get().equals(buttonTypeThree)) {
-                        if(bluepicked == false){
-                            bluepicked = true;
-                            startContinent = "blue";
-                            TerritoryAlert(p.get(i), c3);
-                        }  else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    } else if (result.get().equals(buttonTypeFour)) {
-                        if(greenpicked == false){
-                            greenpicked = true;
-                            startContinent = "green";
-                            TerritoryAlert(p.get(i), c4);
-                        }  else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    }else if (result.get().equals(buttonTypeCancel)){
-                        System.exit(0);
-                    }
-                    p.get(i).addTerritory(determineTerritory(startingTerritory));
-                     determineTerritory(startingTerritory).setController(Game.getPlayers().get(i));
-                    
+            ArrayList<Territory> randomizedTerritories = new ArrayList<>();
+            for(Continent c: Game.getContinents()){
+                for(Territory t: c.getTerritory()){
+                    randomizedTerritories.add(t);
                 }
-               
             }
-    
+            long randomizer = System.nanoTime();
+            Collections.shuffle(randomizedTerritories, new Random(randomizer));
+            for(int i = 0; i < randomizedTerritories.size(); i++){
+                if(p1.getTerritories().size() < randomizedTerritories.size() / 2){
+                    p1.addTerritory(randomizedTerritories.get(i));
+                    randomizedTerritories.get(i).setController(p1);
+                } else {
+                    p2.addTerritory(randomizedTerritories.get(i));
+                    randomizedTerritories.get(i).setController(p2);
+                }
+            }
         }
-            
     }
     
     

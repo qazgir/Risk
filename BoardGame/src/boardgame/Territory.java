@@ -58,6 +58,7 @@ public class Territory {
     }
     public void changeUnits(int k){
         units = k;
+        refreshText();
     }
     public boolean isAdjacent(Territory t){
         for (int k = 0; k<adjacent.size(); k++) {
@@ -78,8 +79,7 @@ public class Territory {
             //in reinforce phase
             if (Game.getPlayingPlayer().equals(this.controller)) {
                 //territory is valid
-                units++;
-                refreshText();
+                changeUnits(units+1);
                 Game.setReinforceUnits(Game.getReinforceUnits()-1);
                 if (Game.getReinforceUnits() == 0) {
                     //out of reinforce units
@@ -103,15 +103,11 @@ public class Territory {
                         } else {
                             from.changeUnits(from.getUnits()-1);
                         }
-                        refreshText();
-                        Game.getFromTerritory().refreshText();
                     }
                     Game.setFromTerritory(null);
                     if (this.getUnits() <= 0) {
                         this.getController().surrenderTerritory(this, Game.getPlayingPlayer());
                         TurnPhases.moveSingle(from, this);
-                        refreshText();
-                        Game.getFromTerritory().refreshText();
                     }
                 } else if (this.equals(Game.getFromTerritory())) {
                     Game.setFromTerritory(null);
@@ -126,8 +122,6 @@ public class Territory {
             } else {
                 if (Game.getPlayingPlayer().equals(this.controller) && Game.getFromTerritory().isAdjacent(this)) {
                     TurnPhases.moveSingle(Game.getFromTerritory(), this);
-                    refreshText();
-                    Game.getFromTerritory().refreshText();
                 }
             }
         }
