@@ -272,7 +272,7 @@ private ImageView background;
                         System.exit(0);
                     }
                     p.get(i).addTerritory(determineTerritory(startingTerritory));
-                     determineTerritory(startingTerritory).setController(p1);
+                     determineTerritory(startingTerritory).setController(Game.getPlayers().get(i));
                     
                 }
                
