@@ -97,18 +97,18 @@ public class Territory {
                     Territory from = Game.getFromTerritory();
                     ArrayList<Integer> attackingDice = TurnPhases.rollNumDice(Math.min(from.getUnits() - 1, 3));
                     ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.min(this.getUnits() - 1, 2));
-                    for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
+                    for (int i = Math.min(attackingDice.size(), defendingDice.size())-1; i >= 0; i--) {
                         if (attackingDice.get(i) > defendingDice.get(i)) {
                             this.changeUnits(this.getUnits()-1);
                         } else {
                             from.changeUnits(from.getUnits()-1);
                         }
                     }
-                    Game.setFromTerritory(null);
                     if (this.getUnits() <= 0) {
                         this.getController().surrenderTerritory(this, Game.getPlayingPlayer());
                         TurnPhases.moveSingle(from, this);
                     }
+                    Game.setFromTerritory(null);
                 } else if (this.equals(Game.getFromTerritory())) {
                     Game.setFromTerritory(null);
                 }
@@ -116,7 +116,7 @@ public class Territory {
         } else if (Game.getCurrentPhase().equals("move")) {
             //in move phase
             if (Game.getFromTerritory() == null) {
-                if (Game.getPlayingPlayer().equals(this.controller)) {
+                if (Game.getPlayingPlayer().equals(this.controller) && this.units > 1) {
                     Game.setFromTerritory(this);
                 }
             } else {

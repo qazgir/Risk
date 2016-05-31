@@ -6,14 +6,13 @@
 package boardgame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
-import java.util.TreeSet;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.stage.Stage;
 
 /**
  *
@@ -69,17 +68,14 @@ public class TurnPhases {
     }
     
     public static int diceRoll() {
-        return (int)Math.random()*6 + 1;
+        return (int)(Math.random()*6) + 1;
     }
     public static ArrayList<Integer> rollNumDice(int num) {
-        TreeSet<Integer> sorted = new TreeSet<Integer>();
-        for (int i = 0; i < num; i++) {
-            sorted.add(diceRoll());
-        }
         ArrayList<Integer> out = new ArrayList<Integer>();
-        for (int i : sorted) {
-            out.add(i);
+        for (int i = 0; i < num; i++) {
+            out.add(diceRoll());
         }
+        Collections.sort(out);
         return out;
     }
 }

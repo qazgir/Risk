@@ -84,7 +84,7 @@ public class Game {
     }
     public static void setCurrentPhase(String s) {
         currentPhase = s;
-        //MapController.phaseIndic.setText(s);
+        //MapController.changePhaseIndic(s);
     }
     public static Continent[] getContinents() {
         return continents;

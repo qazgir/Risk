@@ -43,56 +43,56 @@ import javafx.stage.Stage;
 public class MapController implements Initializable {
     
 @FXML
-public Button button1;
+private Button button1;
 @FXML
-public Button button2;
+private Button button2;
 @FXML
-public Button button3;
+private Button button3;
 @FXML
-public Button button4;
+private Button button4;
 @FXML
-public Button button5;
+private Button button5;
 @FXML
-public Button button6;
+private Button button6;
 @FXML
-public Button button7;
+private Button button7;
 @FXML
-public Button button8;
+private Button button8;
 @FXML
-public Button button9;
+private Button button9;
 @FXML
-public Button button10;
+private Button button10;
 @FXML
-public Button button11;
+private Button button11;
 @FXML
-public Button button12;
+private Button button12;
 @FXML
-public Button button13;
+private Button button13;
 @FXML
-public Button button14;
+private Button button14;
 @FXML
-public Button button15;
+private Button button15;
 @FXML
-public Button button16;
+private Button button16;
 
 private boolean start = false;
 
     
 @FXML
-public Text phaseIndic;
+private Text phaseIndic;
 
 @FXML 
-public Text playerIndic; 
+private Text playerIndic; 
 
-public boolean victory = false;
+private boolean victory = false;
 
-public Continent c1 = null;
+private Continent c1 = null;
 
-public Continent c2 = null;
+private Continent c2 = null;
 
-public Continent c3 = null;
+private Continent c3 = null;
 
-public Continent c4 = null;
+private Continent c4 = null;
 
 
 @FXML
