@@ -9,6 +9,9 @@ package boardgame;
 import static boardgame.MainMenuController.fxmlLoader;
 import static boardgame.MainMenuController.stage2;
 import static boardgame.MainMenuController.twoPlayer;
+import java.awt.Color;
+import static java.awt.Color.red;
+import java.awt.Paint;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +34,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -135,6 +140,7 @@ private ImageView background;
     }    
     
     public void createMVPTerritories(){
+
         Territory t1 = new Territory(3, "JackyMayo", button1);
         Territory t2 = new Territory(3, "EE-Sama", button2);
         Territory t3 = new Territory(3, "RTZBabyrage", button3);
@@ -187,6 +193,7 @@ private ImageView background;
 }
 
     
+    
     public void initialClaim(){
         if(MainMenuController.twoPlayer == true){
             ArrayList<Territory> p1T = new ArrayList<>();
@@ -209,9 +216,11 @@ private ImageView background;
                 if(p1.getTerritories().size() < randomizedTerritories.size() / 2){
                     p1.addTerritory(randomizedTerritories.get(i));
                     randomizedTerritories.get(i).setController(p1);
+                    randomizedTerritories.get(i).getLinkedButton().setStyle("-fx-background-color:ffb3b3");
                 } else {
                     p2.addTerritory(randomizedTerritories.get(i));
                     randomizedTerritories.get(i).setController(p2);
+                    randomizedTerritories.get(i).getLinkedButton().setStyle("-fx-background-color:b3b3ff");
                 }
             }
         }
