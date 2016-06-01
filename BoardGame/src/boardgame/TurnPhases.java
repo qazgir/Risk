@@ -23,36 +23,10 @@ public class TurnPhases {
     public TurnPhases() {
     }
     
-    /*public static void reinforce(Player p) {
-        Game.setCurrentPhase("reinforce");
-        int numArmies = p.getUnitsPerTurn();
-        //g.outText("Place armies on your territories. Left: " + numArmies);
-        Territory t = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        for (int i = 0; i < numArmies; i++) {
-            t = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            while (!(t.getController().equals(p))) {
-                t = Game.getLastClickedTerritory();
-            }
-            t.changeUnits(t.getUnits()+ 1);
-        }
-    }*/
-    
     public static void reinforce(Player p) {
         Game.setCurrentPhase("reinforce");
-        int numArmies = p.getUnitsPerTurn();
-        while(numArmies > 0){
-            if(Game.getLastClickedTerritory() == null){
-                Territory t = Game.getLastClickedTerritory();
-                if(t.getController().equals(p)){
-                    t.changeUnits(t.getUnits()+ 1);
-                    numArmies = numArmies - 1;
-                }
-            }    
-        }
+        Game.setFromTerritory(null);
     }
-    
 
     public static void attack(Player p) {
         Game.setCurrentPhase("attack");
