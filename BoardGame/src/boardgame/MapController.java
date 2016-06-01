@@ -195,8 +195,11 @@ private ImageView background;
             }
         }
 }
-
-    
+/*
+    public static Text getPlayerI(){
+        return playerIndic;
+    }
+    */
     public void initialClaim(){
         boolean redpicked = false;
         boolean pinkpicked = false;
@@ -206,11 +209,11 @@ private ImageView background;
             ArrayList<Territory> p1T = new ArrayList<>();
             String user1 = new String ("");
             String user2 = new String ("");
-        
+            
             TextInputDialog dialog1 = new TextInputDialog("");
             dialog1.setTitle("Text Input Dialog");
             dialog1.setHeaderText("Username Selection");
-            dialog1.setContentText("Please enter your username:");
+            dialog1.setContentText("Player 1, please enter your username:");
             Optional<String> user1Result = dialog1.showAndWait();
             if (user1Result.isPresent()){
                 user1 = user1Result.get();
@@ -218,7 +221,7 @@ private ImageView background;
             TextInputDialog dialog2 = new TextInputDialog("");
             dialog2.setTitle("Text Input Dialog");
             dialog2.setHeaderText("Username Selection");
-            dialog2.setContentText("Please enter your username:");
+            dialog2.setContentText("Player 2, please enter your username:");
             Optional<String> user2Result = dialog2.showAndWait();
             if (user2Result.isPresent()){
                 user2 = user2Result.get();
@@ -231,6 +234,7 @@ private ImageView background;
             p.add(p1);
             p.add(p2);
             Game.setPlayers(p);
+            //playerIndic.setText(p1.getpName());
             if(Game.getLastClickedTerritory() == null){
                 for(int i = 0; i < Game.getPlayers().size(); i++){
                     Alert alert = new Alert(AlertType.CONFIRMATION);

@@ -104,8 +104,8 @@ public void startGame() throws IOException{
         this.startingUnits = 40;
         twoPlayer = true;
     } else if (result.get() == buttonTypeThree) {
-       this.startingUnits = 35;
-       System.out.println("pranked");
+       this.startingUnits = 35; 
+      System.out.println("pranked");
     } else if (result.get() == buttonTypeFour) {
         this.startingUnits = 30;
     } else if (result.get() == buttonTypeFour) {

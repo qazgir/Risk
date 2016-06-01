@@ -39,6 +39,7 @@ public class TurnPhases {
     public static void reinforce(Player p) {
         Game.setCurrentPhase("reinforce");
         int numArmies = p.getUnitsPerTurn();
+        //MapController.getPlayerI().setText(p.getpName());
         while(numArmies > 0){
             if(Game.getLastClickedTerritory() == null){
                 Territory t = Game.getLastClickedTerritory();
