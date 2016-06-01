@@ -101,10 +101,8 @@ private Continent c4 = null;
 
 
 @FXML
-private void handleButtonAction(ActionEvent event) {
-    
-        Game.setLastClickedTerritory(determineTerritory((Button) event.getSource())); 
-    
+private void handleButtonAction(ActionEvent event) { 
+    Game.setLastClickedTerritory(determineTerritory((Button) event.getSource()));    
 }
 
 @FXML

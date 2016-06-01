@@ -22,6 +22,11 @@
                         <Font name="Cambria" size="30.0" />
                      </font>
                   </Button>
+                  <Button fx:id="help" layoutX="210.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#handleHelp" prefHeight="57.0" prefWidth="150.0" text="Instructions">
+                     <font>
+                        <Font name="Cambria" size="20.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="play" layoutY="243.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="57.0" prefWidth="150.0" text="Start">
                      <font>
                         <Font name="Cambria" size="30.0" />
