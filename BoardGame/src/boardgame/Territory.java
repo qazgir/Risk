@@ -7,6 +7,7 @@ package boardgame;
 
 import javafx.scene.control.Button;
 import java.util.*;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -89,6 +90,19 @@ public class Territory {
         } else if (Game.getCurrentPhase().equals("attack")) {
             //in attack phase
             if (Game.getFromTerritory() == null) {
+                if(!(Game.getPlayingPlayer().equals(this.controller))){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("You don't own that territory");
+                alert.showAndWait();
+                }else if(this.units<2){
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setTitle("Error");
+                alert2.setHeaderText(null);
+                alert2.setContentText("You don't have enough units to attack.");
+                alert2.showAndWait();
+                }
                 if (Game.getPlayingPlayer().equals(this.controller) && this.units >= 2) {
                     Game.setFromTerritory(this);
                 }
