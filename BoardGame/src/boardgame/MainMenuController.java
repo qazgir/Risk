@@ -118,7 +118,9 @@ public void startGame() throws IOException{
     
     if(twoPlayer){
         Player p1 = new Player("forseen",null);
+        p1.setColor("-fx-background-color:ffb3b3");
         Player p2 = new Player("TaiLopez",null);
+        p2.setColor("-fx-background-color:b3b3ff");
     }else{
         System.exit(0);
     }

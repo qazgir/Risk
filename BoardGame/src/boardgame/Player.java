@@ -17,12 +17,21 @@ public class Player {
     private int units;
     private String pName;
     private ArrayList<Territory> territories;
-   
+    private String color;
+    
     public Player(String name, ArrayList<Territory> myTerritory){
         units = 3;
         pName = name;
         territories = myTerritory;
-        
+        color = null;
+    }
+    
+    public void setColor(String color){
+        this.color = color;
+    }
+    
+    public String getColor(){
+        return color;
     }
     
     public ArrayList<Territory> getTerritories(){
