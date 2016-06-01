@@ -14,19 +14,33 @@ import java.util.ArrayList;
  */
 public class Game {
     private static ArrayList<Player> players;
-    private static int currentTurn = 0;
+    private static Player playingPlayer;
     private static String currentPhase;
     private static Continent[] continents;
-    private static Player turnTaker;
     private static Territory lastClickedTerritory;
     private static String name;
     private static Territory[] territories;
-    private static boolean advancePhase = false;
+    //All subsequent variables new from fragmented turnPhases
+    private static int currentReinforceUnits;
+    private static Territory fromTerritory;
+    
     
     public static void setPlayers(ArrayList<Player> p) {
         players = p;
     }
     
+    public static void setReinforceUnits(int u) {
+        currentReinforceUnits = u;
+    }
+    public static int getReinforceUnits() {
+        return currentReinforceUnits;
+    }
+    public static Territory getFromTerritory() {
+        return fromTerritory;
+    }
+    public static void setFromTerritory(Territory t) {
+        fromTerritory = t;
+    }
     
     public static void setContinents(Continent[] c) {
         continents = c;
@@ -52,8 +66,11 @@ public class Game {
     public static int getNumPlayers() {
         return players.size();
     }
-    public static int getCurrentTurn() {
-        return currentTurn;
+    public static Player getPlayingPlayer() {
+        return playingPlayer;
+    }
+    public static void setPlayingPlayer(Player p) {
+        playingPlayer = p;
     }
     public static String getCurrentPhase() {
         return currentPhase;
@@ -67,10 +84,7 @@ public class Game {
     }
     public static void setCurrentPhase(String s) {
         currentPhase = s;
-        //MapController.phaseIndic.setText(s);
-    }
-    public static void setCurrentTurn(int t) {
-        currentTurn = t;
+        //MapController.changePhaseIndic(s);
     }
     public static Continent[] getContinents() {
         return continents;
@@ -86,13 +100,25 @@ public class Game {
         lastClickedTerritory = t;
     }
     
-    public static void resetAdvancePhase() {
-        advancePhase = false;
+    public static void victoryCheck(Player p){
+        boolean victory = true;
+        for(Continent c: Game.getContinents()){
+            if(c.getController() != p){
+                victory = false;
+            }
+        }
+        if(victory = true){
+            //playingPlayer has one the game
+            //MapController.openWinScreen(); <- not static
+        }
     }
-    public static boolean getAdvancePhase() {
-        return advancePhase;
-    }
-    public static void activateAdvancePhase() {
-        advancePhase = true;
+    
+    public static void advancePhase() {
+        if (currentPhase.equals("attack")) {
+            victoryCheck(playingPlayer);
+            TurnPhases.move(playingPlayer);
+        } else if (currentPhase.equals("move")) {
+            TurnPhases.takeTurn(players.get((players.indexOf(playingPlayer) + 1) % players.size()));
+        }
     }
 }

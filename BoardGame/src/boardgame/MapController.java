@@ -9,12 +9,17 @@ package boardgame;
 import static boardgame.MainMenuController.fxmlLoader;
 import static boardgame.MainMenuController.stage2;
 import static boardgame.MainMenuController.twoPlayer;
+import java.awt.Color;
+import static java.awt.Color.red;
+import java.awt.Paint;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,8 +34,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -42,56 +48,56 @@ import javafx.stage.Stage;
 public class MapController implements Initializable {
     
 @FXML
-public Button button1;
+private Button button1;
 @FXML
-public Button button2;
+private Button button2;
 @FXML
-public Button button3;
+private Button button3;
 @FXML
-public Button button4;
+private Button button4;
 @FXML
-public Button button5;
+private Button button5;
 @FXML
-public Button button6;
+private Button button6;
 @FXML
-public Button button7;
+private Button button7;
 @FXML
-public Button button8;
+private Button button8;
 @FXML
-public Button button9;
+private Button button9;
 @FXML
-public Button button10;
+private Button button10;
 @FXML
-public Button button11;
+private Button button11;
 @FXML
-public Button button12;
+private Button button12;
 @FXML
-public Button button13;
+private Button button13;
 @FXML
-public Button button14;
+private Button button14;
 @FXML
-public Button button15;
+private Button button15;
 @FXML
-public Button button16;
+private Button button16;
 
 private boolean start = false;
 
     
 @FXML
-public Text phaseIndic;
+private Text phaseIndic;
 
 @FXML 
-public Text playerIndic; 
+private Text playerIndic; 
 
-public boolean victory = false;
+private boolean victory = false;
 
-public Continent c1 = null;
+private Continent c1 = null;
 
-public Continent c2 = null;
+private Continent c2 = null;
 
-public Continent c3 = null;
+private Continent c3 = null;
 
-public Continent c4 = null;
+private Continent c4 = null;
 
 
 @FXML
@@ -101,7 +107,7 @@ private void handleButtonAction(ActionEvent event) {
 
 @FXML
 private void handleAdvancePhase() {
-    Game.activateAdvancePhase();
+    Game.advancePhase();
 }
 private Territory t;
 
@@ -132,22 +138,23 @@ private ImageView background;
     }    
     
     public void createMVPTerritories(){
-        Territory t1 = new Territory(0, "JackyMayo", button1);
-        Territory t2 = new Territory(0, "EE-Sama", button2);
-        Territory t3 = new Territory(0, "RTZBabyrage", button3);
-        Territory t4 = new Territory(0, "EnChuanTress", button4);
-        Territory t5 = new Territory(0, "JeraxSpirit", button5);
-        Territory t6 = new Territory(0, "ODPixel", button6);
-        Territory t7 = new Territory(0, "PEDUR", button7);
-        Territory t8 = new Territory(0, "IndianOfflaners", button8);
-        Territory t9 = new Territory(0, "i buy bread", button9);
-        Territory t10 = new Territory(0, "9000MMRPOINTS", button10);
-        Territory t11 = new Territory(0, "HappyLilTree", button11);
-        Territory t12 = new Territory(0, "VirtusThrow", button12);
-        Territory t13 = new Territory(0, "DondoFace", button13);
-        Territory t14 = new Territory(0, "DC>>MemeArrows", button14);
-        Territory t15 = new Territory(0, "Keepo", button15);
-        Territory t16 = new Territory(0, "SinGSonG", button16);
+
+        Territory t1 = new Territory(3, "JackyMayo", button1);
+        Territory t2 = new Territory(3, "EE-Sama", button2);
+        Territory t3 = new Territory(3, "RTZBabyrage", button3);
+        Territory t4 = new Territory(3, "EnChuanTress", button4);
+        Territory t5 = new Territory(3, "JeraxSpirit", button5);
+        Territory t6 = new Territory(3, "ODPixel", button6);
+        Territory t7 = new Territory(3, "PEDUR", button7);
+        Territory t8 = new Territory(3, "IndianOfflaners", button8);
+        Territory t9 = new Territory(3, "i buy bread", button9);
+        Territory t10 = new Territory(3, "9000MMRPOINTS", button10);
+        Territory t11 = new Territory(3, "HappyLilTree", button11);
+        Territory t12 = new Territory(3, "VirtusThrow", button12);
+        Territory t13 = new Territory(3, "DondoFace", button13);
+        Territory t14 = new Territory(3, "DC>>MemeArrows", button14);
+        Territory t15 = new Territory(3, "Keepo", button15);
+        Territory t16 = new Territory(3, "SinGSonG", button16);
         
         Territory[] TArray1= {t1, t2, t3, t4};
         Territory[] TArray2= {t5, t6, t7, t8};
@@ -180,31 +187,12 @@ private ImageView background;
         Game.setContinents(gameContinents);
         Game.setTerritories(gameTerritories);
         initialClaim();
-        while(victory == false){
-            ArrayList<Player> t = Game.getPlayers();
-            for(int i = 0; i < t.size(); i++){
-                temp = t.get(i);
-                Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Next Turn");
-                            confirm.setContentText("It is now " + temp.getpName() + "'s turn!");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                //TurnPhases.takeTurn(temp);
-                victoryCheck(temp);
-            }
-        }
+        TurnPhases.takeTurn(Game.getPlayers().get(0));
 }
-/*
-    public static Text getPlayerI(){
-        return playerIndic;
-    }
-    */
+
+    
+    
     public void initialClaim(){
-        boolean redpicked = false;
-        boolean pinkpicked = false;
-        boolean greenpicked = false;
-        boolean bluepicked = false;
         if(MainMenuController.twoPlayer == true){
             ArrayList<Territory> p1T = new ArrayList<>();
             String user1 = new String ("");
@@ -234,88 +222,26 @@ private ImageView background;
             p.add(p1);
             p.add(p2);
             Game.setPlayers(p);
-            //playerIndic.setText(p1.getpName());
-            if(Game.getLastClickedTerritory() == null){
-                for(int i = 0; i < Game.getPlayers().size(); i++){
-                    Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setTitle("Start");
-                    alert.setHeaderText("Choose the  Starting Continent");
-                    alert.setContentText("What continent would you like to start in?");
-                    ButtonType buttonTypeOne = new ButtonType("Red");
-                    ButtonType buttonTypeTwo = new ButtonType("Pink");
-                    ButtonType buttonTypeThree = new ButtonType("Blue");
-                    ButtonType buttonTypeFour = new ButtonType("Green");
-                    ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == buttonTypeOne) {
-                        if(redpicked == false){
-                            redpicked = true;
-                            startContinent = "red";
-                            TerritoryAlert(p.get(i), c1);
-                        } else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    }else if (result.get() == buttonTypeTwo){
-                         if(pinkpicked == false){
-                            pinkpicked = true;
-                            startContinent = "pink";
-                            TerritoryAlert(p.get(i), c2);
-                         } else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    } else if (result.get() == buttonTypeThree) {
-                        if(bluepicked == false){
-                            bluepicked = true;
-                            startContinent = "blue";
-                            TerritoryAlert(p.get(i), c3);
-                        }  else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    } else if (result.get() == buttonTypeFour) {
-                        if(greenpicked == false){
-                            greenpicked = true;
-                            startContinent = "green";
-                            TerritoryAlert(p.get(i), c4);
-                        }  else {
-                            Alert confirm = new Alert(AlertType.CONFIRMATION);
-                            confirm.setTitle("Allready occupied territory");
-                            confirm.setContentText("That continent is allready occupied");
-                            ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-                            confirm.getButtonTypes().setAll(okButton);
-                            confirm.showAndWait();
-                            alert.showAndWait();
-                        }
-                    }else if (result.get() == buttonTypeCancel){
-                        System.exit(0);
-                    }
-                    p.get(i).addTerritory(determineTerritory(startingTerritory));
-                     
-                    
+            ArrayList<Territory> randomizedTerritories = new ArrayList<>();
+            for(Continent c: Game.getContinents()){
+                for(Territory t: c.getTerritory()){
+                    randomizedTerritories.add(t);
                 }
-               
             }
-    
+            long randomizer = System.nanoTime();
+            Collections.shuffle(randomizedTerritories, new Random(randomizer));
+            for(int i = 0; i < randomizedTerritories.size(); i++){
+                if(p1.getTerritories().size() < randomizedTerritories.size() / 2){
+                    p1.addTerritory(randomizedTerritories.get(i));
+                    randomizedTerritories.get(i).setController(p1);
+                    randomizedTerritories.get(i).getLinkedButton().setStyle("-fx-background-color:ffb3b3");
+                } else {
+                    p2.addTerritory(randomizedTerritories.get(i));
+                    randomizedTerritories.get(i).setController(p2);
+                    randomizedTerritories.get(i).getLinkedButton().setStyle("-fx-background-color:b3b3ff");
+                }
+            }
         }
-            
     }
     
     
@@ -332,43 +258,43 @@ private ImageView background;
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button1;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button5;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button9;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button13;
             }
         }else if (result.get() == buttonTypeTwo){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button2;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button6;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button10;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button14;
             }
         }else if (result.get() == buttonTypeThree){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button3;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button7;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button11;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button15;
             }
         }else if (result.get() == buttonTypeFour){
-            if(startContinent == "red"){
+            if("red".equals(startContinent)){
                 startingTerritory = button4;
-            }else if(startContinent == "pink"){
+            }else if("pink".equals(startContinent)){
                 startingTerritory = button8;
-            }else if(startContinent == "blue"){
+            }else if("blue".equals(startContinent)){
                 startingTerritory = button12;
-            }else if(startContinent == "green"){
+            }else if("green".equals(startContinent)){
                 startingTerritory = button16;
             }
         }else if (result.get() == buttonTypeCancel){
@@ -383,33 +309,23 @@ private ImageView background;
             }
         }
     }
-    
-    public void victoryCheck(Player p){
-        victory = true;
-        for(Continent c: Game.getContinents()){
-            if(c.getController() != p){
-                victory = false;
-            }
+   
+   public void openWinScreen() {
+       this.stage3 = BoardGame.stage;
+       fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            stage2.setScene(scene);
+            stage2.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(victory = true){
-            this.stage3 = BoardGame.stage;
-            fxmlLoader = new FXMLLoader(getClass().getResource("Win.fxml"));  
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-                Scene scene = new Scene(root);
-                stage2.setScene(scene);
-                stage2.show();
-            } catch (IOException ex) {
-                Logger.getLogger(TurnPhases.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-    }
+   }
     
-   public void victoryCheck(){
-       Player p = new Player("Test", null);
-       victoryCheck(p);
+   public void victoryCheck() {
+       
    }
    
    public Territory determineTerritory(Button b){

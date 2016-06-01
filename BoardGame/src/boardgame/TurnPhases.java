@@ -6,10 +6,13 @@
 package boardgame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
-import java.util.TreeSet;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.stage.Stage;
 
 /**
  *
@@ -20,97 +23,38 @@ public class TurnPhases {
     public TurnPhases() {
     }
     
-    /*public static void reinforce(Player p) {
-        Game.setCurrentPhase("reinforce");
-        int numArmies = p.getUnitsPerTurn();
-        //g.outText("Place armies on your territories. Left: " + numArmies);
-        Territory t = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        for (int i = 0; i < numArmies; i++) {
-            t = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            while (!(t.getController().equals(p))) {
-                t = Game.getLastClickedTerritory();
-            }
-            t.changeUnits(t.getUnits()+ 1);
-        }
-    }*/
-    
     public static void reinforce(Player p) {
         Game.setCurrentPhase("reinforce");
-        int numArmies = p.getUnitsPerTurn();
-        //MapController.getPlayerI().setText(p.getpName());
-        while(numArmies > 0){
-            if(Game.getLastClickedTerritory() == null){
-                Territory t = Game.getLastClickedTerritory();
-                if(t.getController().equals(p)){
-                    t.changeUnits(t.getUnits()+ 1);
-                    numArmies = numArmies - 1;
-                }
-            }    
-        }
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Turn Phase");
+        alert.setHeaderText(null);
+        alert.setContentText("It is now the reinforce phase.");
+        alert.showAndWait();
+        Game.setReinforceUnits(p.getUnitsPerTurn());
+        Game.setFromTerritory(null);
     }
-    
 
     public static void attack(Player p) {
         Game.setCurrentPhase("attack");
-        //g.outText("To attack, first select the territory you would like to attack from");
-        while (true) {
-            Territory from = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            Game.resetAdvancePhase();
-            while (!(from.getController().equals(p) && from.getUnits()>=2)) {
-                from = Game.getLastClickedTerritory();
-                if (Game.getAdvancePhase()) {
-                    return;
-                }
-            }
-            Territory to = new Territory(0, "", null);
-            Game.resetLastClickedTerritory();
-            while (to.getController().equals(p) || !(from.isAdjacent(to))) {
-                to = Game.getLastClickedTerritory();
-            }
-            while (to.getUnits() > 0 && from.getUnits() > 1) {
-                ArrayList<Integer> attackingDice = rollNumDice(Math.min(from.getUnits() - 1, 3));
-                ArrayList<Integer> defendingDice = rollNumDice(Math.min(to.getUnits() - 1, 2));
-                for (int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++) {
-                    if (attackingDice.get(i) > defendingDice.get(i)) {
-                        to.changeUnits(to.getUnits()-1);
-                    } else {
-                        from.changeUnits(from.getUnits()-1);
-                    }
-                }
-                Game.resetLastClickedTerritory();
-                while (!Game.getLastClickedTerritory().equals(to)) {
-                    if (Game.getAdvancePhase()) {
-                        break;
-                    }
-                }
-            }
-            if (to.getUnits() <= 0) {
-                to.getController().surrenderTerritory(to, p);
-                moveSingle(from, to);
-            }
-        }
-    
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Turn Phase");
+        alert.setHeaderText(null);
+        alert.setContentText("It is now the attack phase.");
+        alert.showAndWait();
+        Game.setFromTerritory(null);
     }
     
     public static void move(Player p) {
         Game.setCurrentPhase("move");
-        Territory from = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        while (!from.getController().equals(p) || from.getUnits() < 2) {
-            from = Game.getLastClickedTerritory();
-        }
-        Territory to = new Territory(0, "", null);
-        Game.resetLastClickedTerritory();
-        while (!from.isAdjacent(to) || !to.getController().equals(p)) {
-            to = Game.getLastClickedTerritory();
-        }
-        moveSingle(from, to);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Turn Phase");
+        alert.setHeaderText(null);
+        alert.setContentText("It is now the move phase.");
+        alert.showAndWait();
+        Game.setFromTerritory(null);
     }
     
-    private static void moveSingle(Territory from, Territory to) {
+    public static void moveSingle(Territory from, Territory to) {
         ArrayList<Integer> choices = new ArrayList<Integer>();
         for (int i = 0; i < from.getUnits(); i++) {
             choices.add(i);
@@ -129,24 +73,25 @@ public class TurnPhases {
     }
     
     public static void takeTurn(Player p) {
+        Game.setPlayingPlayer(p);
+        Alert confirm = new Alert(AlertType.CONFIRMATION);
+        confirm.setTitle("Next Turn");
+        confirm.setContentText("It is now " + p.getpName() + "'s turn!");
+        ButtonType okButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        confirm.getButtonTypes().setAll(okButton);
+        confirm.showAndWait();
         reinforce(p);
-        attack(p);
-        move(p);
-        Game.setCurrentTurn((Game.getCurrentTurn()+1) % Game.getNumPlayers());
     }
     
     public static int diceRoll() {
-        return (int)Math.random()*6 + 1;
+        return (int)(Math.random()*6) + 1;
     }
     public static ArrayList<Integer> rollNumDice(int num) {
-        TreeSet<Integer> sorted = new TreeSet<Integer>();
-        for (int i = 0; i < num; i++) {
-            sorted.add(diceRoll());
-        }
         ArrayList<Integer> out = new ArrayList<Integer>();
-        for (int i : sorted) {
-            out.add(i);
+        for (int i = 0; i < num; i++) {
+            out.add(diceRoll());
         }
+        Collections.sort(out);
         return out;
     }
 }
