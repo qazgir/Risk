@@ -118,7 +118,7 @@ private Button startingTerritory;
 private Territory startT;
 
 @FXML
-public Button advancePhase;
+private Button advancePhase;
 
 @FXML
 //public static Text playerIndic;
@@ -301,6 +301,13 @@ private ImageView background;
         }else if (result.get() == buttonTypeCancel){
             System.exit(0);
         }
+    }
+    
+    public Text getPlayerTextBox() {
+        return playerIndic;
+    }
+    public Text getPhaseTextBox() {
+        return phaseIndic;
     }
     
     public void TerritoryChecker(Territory t){

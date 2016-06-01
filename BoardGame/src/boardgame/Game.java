@@ -54,6 +54,13 @@ public class Game {
         //...
     }
     
+    public static void setPlayerText(String s) {
+        mapCon.getPlayerTextBox().setText(s);
+    }
+    public static void setPhaseText(String s) {
+        mapCon.getPhaseTextBox().setText(s);
+    }
+    
     public static ArrayList<Player> getPlayers() {
         return players;
     }
@@ -65,6 +72,7 @@ public class Game {
     }
     public static void setPlayingPlayer(Player p) {
         playingPlayer = p;
+        setPlayerText(p.getpName());
     }
     public static String getCurrentPhase() {
         return currentPhase;
@@ -78,7 +86,7 @@ public class Game {
     }
     public static void setCurrentPhase(String s) {
         currentPhase = s;
-        //MapController.changePhaseIndic(s);
+        setPhaseText(s);
     }
     public static Continent[] getContinents() {
         return continents;
