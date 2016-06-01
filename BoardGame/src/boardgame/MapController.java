@@ -135,6 +135,7 @@ private ImageView background;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Game.setConnectedController(this);
     }    
     
     public void createMVPTerritories(){
@@ -331,7 +332,7 @@ private ImageView background;
    public Territory determineTerritory(Button b){
        for(Continent c: Game.getContinents()){
            for(Territory t: c.getTerritory()){
-               if(t.getLinkedButton() == b){
+               if(t.getLinkedButton().equals(b)){
                    return t;
                }
            }

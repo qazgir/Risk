@@ -100,19 +100,19 @@ public void startGame() throws IOException{
     alert.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeFive, buttonTypeSix, buttonTypeCancel);
 
     Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == buttonTypeTwo){
+    if (result.get().equals(buttonTypeTwo)){
         this.startingUnits = 40;
         twoPlayer = true;
-    } else if (result.get() == buttonTypeThree) {
+    } else if (result.get().equals(buttonTypeThree)) {
        this.startingUnits = 35; 
       System.out.println("pranked");
-    } else if (result.get() == buttonTypeFour) {
+    } else if (result.get().equals(buttonTypeFour)) {
         this.startingUnits = 30;
-    } else if (result.get() == buttonTypeFour) {
+    } else if (result.get().equals(buttonTypeFour)) {
         this.startingUnits = 25;
-    }else if (result.get() == buttonTypeFour) {
+    }else if (result.get().equals(buttonTypeFour)) {
         this.startingUnits = 20;
-    }else if (result.get() == buttonTypeCancel){
+    }else if (result.get().equals(buttonTypeCancel)){
         System.exit(0);
     }
     

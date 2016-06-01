@@ -23,7 +23,11 @@ public class Game {
     //All subsequent variables new from fragmented turnPhases
     private static int currentReinforceUnits;
     private static Territory fromTerritory;
+    private static MapController mapCon;
     
+    public static void setConnectedController(MapController mc) {
+        mapCon = mc;
+    }
     
     public static void setPlayers(ArrayList<Player> p) {
         players = p;
@@ -45,16 +49,6 @@ public class Game {
     public static void setContinents(Continent[] c) {
         continents = c;
     }
-    
-    /*public static void setTurnTaker(Player p){
-        if(players != null){    
-            turnTaker = p;
-            name = p.getpName();
-            MapController.playerIndic.setText("player");
-        }else{
-            
-        }
-    }*/
     
     public static void outText(String s) {
         //...
@@ -107,9 +101,9 @@ public class Game {
                 victory = false;
             }
         }
-        if(victory = true){
-            //playingPlayer has one the game
-            //MapController.openWinScreen(); <- not static
+        if(victory){
+            //playingPlayer has won the game
+            mapCon.openWinScreen();
         }
     }
     
