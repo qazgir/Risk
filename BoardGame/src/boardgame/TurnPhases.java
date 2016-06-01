@@ -25,6 +25,7 @@ public class TurnPhases {
     
     public static void reinforce(Player p) {
         Game.setCurrentPhase("reinforce");
+        Game.setReinforceUnits(p.getUnitsPerTurn());
         Game.setFromTerritory(null);
     }
 
