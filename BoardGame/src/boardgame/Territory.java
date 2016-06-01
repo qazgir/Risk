@@ -32,8 +32,10 @@ public class Territory {
         return linkedButton; 
     }
     
+    
     public void setController(Player n){
         controller = n;
+        this.linkedButton.setStyle(n.getColor());
     }
     public int getUnits(){
         return units;
@@ -109,14 +111,20 @@ public class Territory {
             } else {
                 if (!(Game.getPlayingPlayer().equals(this.controller)) && Game.getFromTerritory().isAdjacent(this)) {
                     Territory from = Game.getFromTerritory();
-                    ArrayList<Integer> attackingDice = TurnPhases.rollNumDice(Math.min(from.getUnits() - 1, 3));
-                    ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.max(Math.min(this.getUnits() - 1, 2), 1));
-                    for (int i = Math.min(attackingDice.size(), defendingDice.size())-1; i >= 0; i--) {
-                        if (attackingDice.get(i) > defendingDice.get(i)) {
-                            this.changeUnits(this.getUnits()-1);
-                        } else {
-                            from.changeUnits(from.getUnits()-1);
+                    if(this.getUnits() > 1 && Game.getFromTerritory().getUnits() > 0){
+                        ArrayList<Integer> attackingDice = TurnPhases.rollNumDice(Math.min(from.getUnits() - 1, 3));
+                        ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.max(Math.min(this.getUnits() - 1, 2), 1));
+                        for (int i = Math.min(attackingDice.size(), defendingDice.size())-1; i >= 0; i--) {
+                            if (attackingDice.get(i) > defendingDice.get(i)) {
+                                this.changeUnits(this.getUnits()-1);
+                            } else {
+                                from.changeUnits(from.getUnits()-1);
+                            }
                         }
+                    } else if(this.getUnits() == 0){
+                        this.setController(Game.getFromTerritory().getController());
+                    } else {
+                        Game.getFromTerritory().setController(this.getController());
                     }
                     if (this.getUnits() <= 0) {
                         this.getController().surrenderTerritory(this, Game.getPlayingPlayer());
