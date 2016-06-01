@@ -96,7 +96,7 @@ public class Territory {
                 if (!(Game.getPlayingPlayer().equals(this.controller)) && Game.getFromTerritory().isAdjacent(this)) {
                     Territory from = Game.getFromTerritory();
                     ArrayList<Integer> attackingDice = TurnPhases.rollNumDice(Math.min(from.getUnits() - 1, 3));
-                    ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.min(this.getUnits() - 1, 2));
+                    ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.max(Math.min(this.getUnits() - 1, 2), 1));
                     for (int i = Math.min(attackingDice.size(), defendingDice.size())-1; i >= 0; i--) {
                         if (attackingDice.get(i) > defendingDice.get(i)) {
                             this.changeUnits(this.getUnits()-1);
