@@ -89,6 +89,11 @@ private Text phaseIndic;
 @FXML 
 private Text playerIndic; 
 
+@FXML
+private Text numUnitsText;
+@FXML
+private Text numUnitsNum;
+
 private boolean victory = false;
 
 private Continent c1 = null;
@@ -136,6 +141,8 @@ private ImageView background;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Game.setConnectedController(this);
+        numUnitsNum.setVisible(false);
+        numUnitsText.setVisible(false);
     }    
     
     public void createMVPTerritories(){
@@ -308,6 +315,12 @@ private ImageView background;
     }
     public Text getPhaseTextBox() {
         return phaseIndic;
+    }
+    public Text getUnitsBox() {
+        return numUnitsText;
+    }
+    public Text getUnitsNumBox() {
+        return numUnitsNum;
     }
     
     public void TerritoryChecker(Territory t){

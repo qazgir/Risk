@@ -32,9 +32,13 @@ public class TurnPhases {
         alert.showAndWait();
         Game.setReinforceUnits(p.getUnitsPerTurn());
         Game.setFromTerritory(null);
+        Game.getConnController().getUnitsBox().setVisible(true);
+        Game.getConnController().getUnitsNumBox().setVisible(true);
     }
 
     public static void attack(Player p) {
+        Game.getConnController().getUnitsBox().setVisible(false);
+        Game.getConnController().getUnitsNumBox().setVisible(false);
         Game.setCurrentPhase("attack");
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Turn Phase");

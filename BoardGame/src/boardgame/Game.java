@@ -7,6 +7,7 @@
 package boardgame;
 
 import java.util.ArrayList;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -35,6 +36,7 @@ public class Game {
     
     public static void setReinforceUnits(int u) {
         currentReinforceUnits = u;
+        mapCon.getUnitsNumBox().setText(Integer.toString(u));
     }
     public static int getReinforceUnits() {
         return currentReinforceUnits;
@@ -122,5 +124,9 @@ public class Game {
         } else if (currentPhase.equals("move")) {
             TurnPhases.takeTurn(players.get((players.indexOf(playingPlayer) + 1) % players.size()));
         }
+    }
+    
+    public static MapController getConnController() {
+        return mapCon;
     }
 }
