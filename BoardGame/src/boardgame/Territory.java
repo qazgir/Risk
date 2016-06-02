@@ -111,20 +111,16 @@ public class Territory {
             } else {
                 if (!(Game.getPlayingPlayer().equals(this.controller)) && Game.getFromTerritory().isAdjacent(this)) {
                     Territory from = Game.getFromTerritory();
-                    if(this.getUnits() > 1 && Game.getFromTerritory().getUnits() > 0){
+                    if(this.getUnits() > 0 && Game.getFromTerritory().getUnits() > 0){
                         ArrayList<Integer> attackingDice = TurnPhases.rollNumDice(Math.min(from.getUnits() - 1, 3));
                         ArrayList<Integer> defendingDice = TurnPhases.rollNumDice(Math.max(Math.min(this.getUnits() - 1, 2), 1));
-                        for (int i = Math.min(attackingDice.size(), defendingDice.size())-1; i >= 0; i--) {
-                            if (attackingDice.get(i) > defendingDice.get(i)) {
+                        for (int i = 1; i <= Math.min(attackingDice.size(), defendingDice.size()); i++) {
+                            if (attackingDice.get(attackingDice.size()-i) > defendingDice.get(defendingDice.size()-i)) {
                                 this.changeUnits(this.getUnits()-1);
                             } else {
                                 from.changeUnits(from.getUnits()-1);
                             }
                         }
-                    } else if(this.getUnits() == 0){
-                        this.setController(Game.getFromTerritory().getController());
-                    } else {
-                        Game.getFromTerritory().setController(this.getController());
                     }
                     if (this.getUnits() <= 0) {
                         this.getController().surrenderTerritory(this, Game.getPlayingPlayer());
