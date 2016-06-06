@@ -140,6 +140,7 @@ public class Territory {
             } else {
                 if (Game.getPlayingPlayer().equals(this.controller) && Game.getFromTerritory().isAdjacent(this)) {
                     TurnPhases.moveSingle(Game.getFromTerritory(), this);
+                    Game.setFromTerritory(null);
                 }
             }
         }

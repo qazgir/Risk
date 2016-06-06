@@ -21,10 +21,19 @@ public class Game {
     private static Territory lastClickedTerritory;
     private static String name;
     private static Territory[] territories;
+    private static int numPlayers;
     //All subsequent variables new from fragmented turnPhases
     private static int currentReinforceUnits;
     private static Territory fromTerritory;
     private static MapController mapCon;
+    
+    public static void setNumPlayers(int n) {
+        numPlayers = n;
+    }
+    
+    public static int getNumPlayers() {
+        return numPlayers;
+    }
     
     public static void setConnectedController(MapController mc) {
         mapCon = mc;
@@ -65,9 +74,6 @@ public class Game {
     
     public static ArrayList<Player> getPlayers() {
         return players;
-    }
-    public static int getNumPlayers() {
-        return players.size();
     }
     public static Player getPlayingPlayer() {
         return playingPlayer;

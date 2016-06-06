@@ -103,25 +103,20 @@ public void startGame() throws IOException{
     if (result.get().equals(buttonTypeTwo)){
         this.startingUnits = 40;
         twoPlayer = true;
+        Game.setNumPlayers(2);
     } else if (result.get().equals(buttonTypeThree)) {
        this.startingUnits = 35; 
-      System.out.println("pranked");
+       Game.setNumPlayers(3);
     } else if (result.get().equals(buttonTypeFour)) {
         this.startingUnits = 30;
-    } else if (result.get().equals(buttonTypeFour)) {
+        Game.setNumPlayers(4);
+    } else if (result.get().equals(buttonTypeFive)) {
         this.startingUnits = 25;
-    }else if (result.get().equals(buttonTypeFour)) {
+        Game.setNumPlayers(5);
+    }else if (result.get().equals(buttonTypeSix)) {
         this.startingUnits = 20;
+        Game.setNumPlayers(6);
     }else if (result.get().equals(buttonTypeCancel)){
-        System.exit(0);
-    }
-    
-    if(twoPlayer){
-        Player p1 = new Player("forseen",null);
-        p1.setColor("-fx-background-color:ffb3b3");
-        Player p2 = new Player("TaiLopez",null);
-        p2.setColor("-fx-background-color:b3b3ff");
-    }else{
         System.exit(0);
     }
     MainMenuController.stage2 = BoardGame.stage;

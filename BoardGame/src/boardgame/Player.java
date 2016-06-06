@@ -56,6 +56,7 @@ public class Player {
         if (isControlling(t)) {
             p.addTerritory(t);
             territories.remove(t);
+            t.setController(p);
         }
     }
     
